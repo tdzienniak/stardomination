@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/preloadjs.min.js"></script>
+		<script src="js/easeljs.min.js"></script>
+		<script src="js/ball.js"></script>
+		<script src="js/vector.js"></script>
+		<script>
+			var queue = new createjs.LoadQueue(true);
+			queue.addEventListener("complete", handleComplete);
+			queue.loadFile('js/easeljs.min.js');
+
+			var stage, ball1, ball2;
+
+			function init () {
+				stage = new createjs.Stage('mainCanvas');
+
+				ball1 = new Ball(100, 60, 20, "red", [160, 80], 20);
+				ball2 = new Ball(300, 60, 30, "blue", [-90, 30], 10);
+				stage.addChild(ball1, ball2);
+
+				
+				createjs.Ticker.addEventListener('tick', loop);
+				createjs.Ticker.setFPS('60');
+			}
+
+			function handleComplete () {
+				//var canvas = document.getElementById('mainCanvas');
+				init();
+				console.log('Załadowano wszystko!');
+			}
+			
+			function loop (event) {
+				if (event.paused)
+					return;
+
+				//console.log(event.delta);
+
+				if (ball1.x + ball1.radius > stage.canvas.width || ball1.x - ball1.radius < 0) {
+					ball1.velocity.reverseX();
+				}
+
+				if (ball1.y + ball1.radius > stage.canvas.height || ball1.y - ball1.radius < 0) {
+					ball1.velocity.reverseY();
+				}
+
+				if (ball2.x + ball2.radius > stage.canvas.width || ball2.x - ball2.radius < 0) {
+					ball2.velocity.reverseX();
+				}
+
+				if (ball2.y + ball2.radius > stage.canvas.height || ball2.y - ball2.radius < 0) {
+					ball2.velocity.reverseY();
+				}
+
+				//console.log(intersectBallBall(ball1, ball2, event.delta));
+
+				
+				if (distance(ball1, ball2) < ball1.radius + ball2.radius) {
+					intersection = intersectBallBall(ball1, ball2, event.delta);
+
+					//createjs.Ticker.setPaused(true);
+					ball1.position(ball1.previousPosition(event.delta));
+					ball2.position(ball2.previousPosition(event.delta));
+					ball1.moveWithVector(intersection[0]);
+					ball2.moveWithVector(intersection[1]);
+					var reflection = reflectBalls(ball1, ball2);
+
+					ball1.velocity = reflection[0];
+					ball2.velocity = reflection[1];
+				}				
+
+				ball1.move(event.delta);
+				ball2.move(event.delta);
+
+				stage.update();
+			}
+
+			function distance(ballA, ballB) {
+				var AB = new Vector([ballA.x - ballB.x, ballA.y - ballB.y]);
+				return Math.sqrt(AB.dot(AB));
+			}
+
+			//http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=2
+			function intersectBallBall (ballA, ballB, delta) {
+				var A0 = ballA.previousPosition(delta), //previous frame ballA pos
+					A1 = [ballA.x, ballA.y], //current frame ballA pos
+					B0 = ballB.previousPosition(delta), //previous frame ballB pos
+					B1 = [ballB.x, ballB.y], //current frame ballB pos
+					vA = new Vector([A1[0] - A0[0], A1[1] - A0[1]]), //vector between A1 and A0
+					vB = new Vector([B1[0] - B0[0], B1[1] - B0[1]]), //vector beetwen B1 and B0
+					AB = new Vector([B0[0] - A0[0], B0[1] - A0[1]]),
+					vAB = vB.substract(vA, true),
+					rAB = ballA.radius + ballB.radius, //radius sum
+					a = vAB.dot(vAB),
+					b = 2 * vAB.dot(AB),
+					c = AB.dot(AB) - rAB * rAB;
+
+					var quadratic = quadraticFormula(a, b, c);
+
+				if (quadratic) {
+					var intersection = [];
+
+					intersection.push(vA.scale(quadratic[0]));
+					intersection.push(vB.scale(quadratic[0]));
+
+					return intersection;
+				} else {
+					return false;
+				}
+			}
+
+			//http://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=3
+			function reflectBalls (ballA, ballB) {
+				//finding normlized vector between ball's centers
+				var vN = new Vector([ballA.x - ballB.x, ballA.y - ballB.y]);
+				vN.normalize();
+
+				//finding components of velocities along vN
+				var vNA = ballA.velocity.dot(vN, true),
+					vNB = ballB.velocity.dot(vN, true);
+
+				var optimized = (2 * (vNA - vNB)) / (ballA.mass + ballB.mass);
+
+				//calculating new velocities
+				var vAPrim = ballA.velocity.substract(vN.scale(optimized * ballA.mass, true), true),
+					vBPrim = ballB.velocity.add(vN.scale(optimized * ballB.mass, true), true);
+
+				return [vAPrim, vBPrim];
+			}
+
+			function quadraticFormula (a, b, c) {
+				var x1,
+					x2,
+					delta = b * b - 4 * a * c;
+
+				if (delta >= 0) {
+					var sqrtDelta = Math.sqrt(delta);
+					x1 = (-b + sqrtDelta) / (2 * a);
+					x2 = (-b - sqrtDelta) / (2 * a);
+
+					return (x1 <= x2) ? [x1, x2] : [x2, x1];
+				} else {
+					return false;
+				}
+			}
+		</script>
+		<style type="text/css">
+			canvas {
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mainCanvas" width="400" height="400">
+		</canvas>
+		<button onclick="createjs.Ticker.setPaused(true)">Pause</button>
+		<button onclick="createjs.Ticker.setPaused(false)">Play</button>
+	</body>
+</html>
