@@ -24,8 +24,17 @@
 	}
 
 	Vector.prototype.rotate = function (angle) {
-		var fullAngles = angle % 360, //używana do redukcji kąta w przypadku miary ponad 360 stopni
-			newAngle = (angle > 0) ? (this.angle + (angle - 360 * fullAngles)) : (this.angle + (angle + 360 * fullAngles));
+		var fullAngles = Math.abs(angle / 360),
+			newAngle;
+
+		if (fullAngles >= 1 && angle > 0) {
+			fullAngles = Math.floor(fullAngles);
+			newAngle = this.angle + (angle - (fullAngles * 360));
+		} else if (fullAngles >= 1 && angle < 0) {
+			newAngle = this.angle + (angle + (fullAngles * 360));
+		} else {
+			newAngle = this.angle + angle;
+		}
 
 		if (newAngle > 180) {
 			this.angle = -360 + newAngle;
@@ -35,6 +44,7 @@
 			this.angle = newAngle;
 		}
 
+		this.updateCartCoords();
 		return this;
 	};
 
@@ -141,6 +151,18 @@
 		if (returnNew) {
 			return new Vector([this.x, -this.y]);
 		} else {
+			this.y = -this.y;
+			this.updatePolarCoords();
+		}
+	}
+
+	Vector.prototype.reverseBoth = function (returnNew) {
+		var returnNew = returnNew || false;
+
+		if (returnNew) {
+			return new Vector([-this.x, -this.y]);
+		} else {
+			this.x = -this.x;
 			this.y = -this.y;
 			this.updatePolarCoords();
 		}

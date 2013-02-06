@@ -5,23 +5,27 @@
 		<script src="js/easeljs.min.js"></script>
 		<script src="js/ball.js"></script>
 		<script src="js/vector.js"></script>
+		<script src="js/edge.js"></script>
 		<script>
 			var queue = new createjs.LoadQueue(true);
 			queue.addEventListener("complete", handleComplete);
 			queue.loadFile('js/easeljs.min.js');
 
-			var stage, ball1, ball2;
+			var stage, ball1, ball2, fpsCounter, edge1;
 
 			function init () {
 				stage = new createjs.Stage('mainCanvas');
 
-				ball1 = new Ball(100, 60, 20, "red", [160, 80], 20);
-				ball2 = new Ball(300, 60, 30, "blue", [-90, 30], 10);
-				stage.addChild(ball1, ball2);
+				ball1 = new Ball(200, 200, 20, "red", [-50, -80], 10);
+				ball2 = new Ball(300, 300, 50, "blue", [30, 0], 10);
+				edge1 = new Edge([0, 150], [90, 0], "green");
+				stage.addChild(ball1, ball2, edge1);
 
 				
 				createjs.Ticker.addEventListener('tick', loop);
 				createjs.Ticker.setFPS('60');
+
+				fpsCounter = document.getElementById('fps');
 			}
 
 			function handleComplete () {
@@ -33,6 +37,7 @@
 			function loop (event) {
 				if (event.paused)
 					return;
+				fpsCounter.textContent = Math.round(createjs.Ticker.getFPS());
 
 				//console.log(event.delta);
 
@@ -52,18 +57,30 @@
 					ball2.velocity.reverseY();
 				}
 
-				//console.log(intersectBallBall(ball1, ball2, event.delta));
+				var distanceEdge = distanceFromEdge([ball1.x, ball1.y], edge1);
+				//console.log(distanceEdge);
 
+				if (distanceEdge < ball1.radius) {
+						var Ci = intersectBallEdge(ball1, edge1);
+
+						ball1.updatePosition([Ci.x, Ci.y]);
+
+						bounceFromEdge(ball1, edge1);
+
+						//stage.update();
+						//createjs.Ticker.setPaused(true);
+						//return;
+				}
 				
 				if (distance(ball1, ball2) < ball1.radius + ball2.radius) {
 					intersection = intersectBallBall(ball1, ball2, event.delta);
 
 					//createjs.Ticker.setPaused(true);
-					ball1.position(ball1.previousPosition(event.delta));
-					ball2.position(ball2.previousPosition(event.delta));
+					ball1.updatePosition(ball1.previousPosition());
+					ball2.updatePosition(ball2.previousPosition());
 					ball1.moveWithVector(intersection[0]);
 					ball2.moveWithVector(intersection[1]);
-					var reflection = reflectBalls(ball1, ball2);
+					var reflection = bounceBalls(ball1, ball2);
 
 					ball1.velocity = reflection[0];
 					ball2.velocity = reflection[1];
@@ -80,11 +97,15 @@
 				return Math.sqrt(AB.dot(AB));
 			}
 
+			function distanceFromEdge(point, edge) {
+				return Math.abs(new Vector([point[0] - edge.fromX, point[1] - edge.fromY]).dot(edge.normal));
+			}
+
 			//http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=2
 			function intersectBallBall (ballA, ballB, delta) {
-				var A0 = ballA.previousPosition(delta), //previous frame ballA pos
+				var A0 = ballA.previousPosition(), //previous frame ballA pos
 					A1 = [ballA.x, ballA.y], //current frame ballA pos
-					B0 = ballB.previousPosition(delta), //previous frame ballB pos
+					B0 = ballB.previousPosition(), //previous frame ballB pos
 					B1 = [ballB.x, ballB.y], //current frame ballB pos
 					vA = new Vector([A1[0] - A0[0], A1[1] - A0[1]]), //vector between A1 and A0
 					vB = new Vector([B1[0] - B0[0], B1[1] - B0[1]]), //vector beetwen B1 and B0
@@ -109,8 +130,19 @@
 				}
 			}
 
+			function intersectBallEdge (ball, edge) {
+				var C0 = new Vector([ball.prevX, ball.prevY]),
+					C1 = new Vector([ball.x, ball.y]),
+					d0 = distanceFromEdge([C0.x, C0.y], edge),
+					d1 = distanceFromEdge([C1.x, C1.y], edge),
+					ui = (d0 - ball.radius)/(d0 - d1),
+					Ci = C0.scale(1 - ui).add(C1.scale(ui), true);
+
+					return Ci;
+			}
+
 			//http://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=3
-			function reflectBalls (ballA, ballB) {
+			function bounceBalls (ballA, ballB) {
 				//finding normlized vector between ball's centers
 				var vN = new Vector([ballA.x - ballB.x, ballA.y - ballB.y]);
 				vN.normalize();
@@ -126,6 +158,18 @@
 					vBPrim = ballB.velocity.add(vN.scale(optimized * ballB.mass, true), true);
 
 				return [vAPrim, vBPrim];
+			}
+
+			function bounceFromEdge(ball, edge) {
+				ball.velocity.reverseBoth();
+
+				var dot = ball.velocity.dot(edge.normal),
+					refX = 2 * edge.normal.x * dot - ball.velocity.x, //reflection velocity X
+					refY = 2 * edge.normal.y * dot - ball.velocity.y; //reflection velocity Y
+
+				ball.velocity.x = refX;
+				ball.velocity.y = refY;
+				ball.velocity.updatePolarCoords();
 			}
 
 			function quadraticFormula (a, b, c) {
@@ -148,11 +192,24 @@
 			canvas {
 				border: 1px solid black;
 			}
+			.info {
+				padding: 10px 10px;
+				height: 200px;
+				width: 200px;
+				float: right;
+				font-family: calibri;
+				color: white;
+				text-align: right;
+				background: rgb(40,40,40);
+			}
 		</style>
 	</head>
 	<body>
 		<canvas id="mainCanvas" width="400" height="400">
 		</canvas>
+		<div class="info">
+			FPS <span id="fps"></span>
+		</div>
 		<button onclick="createjs.Ticker.setPaused(true)">Pause</button>
 		<button onclick="createjs.Ticker.setPaused(false)">Play</button>
 	</body>

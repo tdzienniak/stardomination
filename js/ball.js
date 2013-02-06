@@ -5,12 +5,7 @@
 
     Ball.prototype = new createjs.Shape();
 
-    // public properties:
-    /*Monster.prototype.IDLEWAITTIME = 40;
-    Monster.prototype.bounds = 0; //visual radial size
-    Monster.prototype.hit = 0;     //average radial disparity
-*/
-    // constructor:
+    // original Shape's constructor:
     Ball.prototype.Shape_initialize = Ball.prototype.initialize;
 
     Ball.prototype.initialize = function (x, y, radius, color, velocity, mass) {
@@ -32,6 +27,8 @@
     }
 
     Ball.prototype.move = function (delta) {
+        this.prevX = this.x;
+        this.prevY = this.y;
     	this.x += delta / 1000 * this.velocity.x;
     	this.y += delta / 1000 * this.velocity.y;
     }
@@ -41,11 +38,11 @@
     	this.y += vector.y;
     }
 
-    Ball.prototype.previousPosition = function (delta) {
-    	return [this.x - delta / 1000 * this.velocity.x, this.y - delta / 1000 * this.velocity.y];
+    Ball.prototype.previousPosition = function () {
+    	return [this.prevX, this.prevY];
     }
-
-    Ball.prototype.position = function (position) {
+    
+    Ball.prototype.updatePosition = function (position) {
     	this.x = position[0];
     	this.y = position[1];
     }
