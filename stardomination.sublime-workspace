@@ -1,0 +1,657 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"speed",
+				"speedX"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"time",
+				"timeElapsed"
+			],
+			[
+				"a",
+				"addEventListener"
+			],
+			[
+				"un",
+				"universe"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"uni",
+				"universe-layer"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"vide",
+				"video-box"
+			],
+			[
+				"video",
+				"video-thumbnail"
+			],
+			[
+				"thu",
+				"thumbnails-box"
+			],
+			[
+				"vi",
+				"video-box"
+			],
+			[
+				"yt",
+				"ytplayer"
+			],
+			[
+				"thumb",
+				"video-thumbnails-grid"
+			],
+			[
+				"entr",
+				"entries"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"bo",
+				"border-radius"
+			],
+			[
+				"li",
+				"link"
+			],
+			[
+				"borde",
+				"border"
+			],
+			[
+				"link",
+				"link-box"
+			],
+			[
+				"sen",
+				"send-button"
+			],
+			[
+				"text",
+				"textarea"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"td",
+				"td-right"
+			],
+			[
+				"fb-",
+				"fb-like-box"
+			],
+			[
+				"back",
+				"back-img"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"border",
+				"border"
+			],
+			[
+				"cla",
+				"class_methods"
+			],
+			[
+				"get_class",
+				"get_class_methods"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"fi",
+				"fields"
+			],
+			[
+				"regist",
+				"registerMethod"
+			],
+			[
+				"Fu",
+				"FunctionNotExistsException"
+			],
+			[
+				"incl",
+				"include"
+			],
+			[
+				"metho",
+				"method_exists"
+			],
+			[
+				"ar",
+				"arguments"
+			],
+			[
+				"cou",
+				"countRight"
+			],
+			[
+				"count",
+				"countLeft"
+			],
+			[
+				"num",
+				"nums"
+			],
+			[
+				"sq",
+				"sqr"
+			],
+			[
+				"number",
+				"number2"
+			],
+			[
+				"str",
+				"string"
+			],
+			[
+				"fu",
+				"function_exists"
+			],
+			[
+				"call_fun",
+				"call_user_func_array"
+			],
+			[
+				"wysyl",
+				"wysylkaId"
+			],
+			[
+				"wysy",
+				"wysyłka"
+			],
+			[
+				"hea",
+				"head"
+			],
+			[
+				"sza",
+				"szablonId"
+			],
+			[
+				"prz",
+				"przygotujWiadomosc"
+			],
+			[
+				"pobierz",
+				"pobierzTytul"
+			],
+			[
+				"pobie",
+				"pobierzAdresatow"
+			],
+			[
+				"za",
+				"zapiszInfoZwrotne"
+			],
+			[
+				"uzytkowni",
+				"uzytkownikId"
+			],
+			[
+				"uzy",
+				"uzytkownikId"
+			],
+			[
+				"dane",
+				"daneUzytkownika"
+			],
+			[
+				"co",
+				"counter"
+			],
+			[
+				"can",
+				"canJoin"
+			],
+			[
+				"curs",
+				"cursor"
+			],
+			[
+				"cu",
+				"cursor"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"dr",
+				"drawBoard"
+			],
+			[
+				"s",
+				"script"
+			],
+			[
+				"game",
+				"game-screen"
+			],
+			[
+				"click",
+				"click"
+			],
+			[
+				"energy",
+				"energyFields"
+			],
+			[
+				"e",
+				"energy"
+			],
+			[
+				"sta",
+				"stability"
+			],
+			[
+				"re",
+				"restore"
+			],
+			[
+				"ener",
+				"energyFields"
+			],
+			[
+				"draw",
+				"drawBackground"
+			],
+			[
+				"gr",
+				"gradient"
+			],
+			[
+				"fill",
+				"fillStyle"
+			],
+			[
+				"ge",
+				"getEnergyFields"
+			],
+			[
+				"get",
+				"getBlockades"
+			],
+			[
+				"en",
+				"energyFields"
+			],
+			[
+				"se",
+				"settings"
+			],
+			[
+				"pri",
+				"printDiffs"
+			],
+			[
+				"pu",
+				"putParticle"
+			],
+			[
+				"par",
+				"particles"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"border-r",
+				"border-right"
+			],
+			[
+				"ene",
+				"energy"
+			],
+			[
+				"from",
+				"fromY"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"print",
+				"printJoints"
+			],
+			[
+				"fro",
+				"fromX"
+			],
+			[
+				"join",
+				"joints"
+			],
+			[
+				"t",
+				"type"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"newP",
+				"newParticleEnergy"
+			],
+			[
+				"fon",
+				"font-family"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 1409,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "(function () {\n	function Ship () {\n	\n	}\n})();",
+			"file": "js/ship.js",
+			"file_size": 3,
+			"file_write_time": 130040639772427733,
+			"settings":
+			{
+				"buffer_size": 45,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 35.0,
+		"selected_items":
+		[
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 402.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Apache24/htdocs/universe/universe.html",
+		"/C/Apache24/htdocs/hvs/hotvscold.sublime-project",
+		"/C/Apache24/local.tomdrozd/new2.html",
+		"/C/Apache24/local.tomdrozd/new.html",
+		"/C/Apache24/htdocs/dynamicmethod.php",
+		"/C/Apache24/htdocs/hvs/script/board.js",
+		"/C/Apache24/htdocs/paper/lib/paper.js",
+		"/C/Apache24/htdocs/paper/test.html",
+		"/C/Apache24/htdocs/hvs/script/loader.js",
+		"/C/Apache24/htdocs/foobar.method.php",
+		"/C/Apache24/htdocs/rejestracja.php",
+		"/C/Apache24/htdocs/email.php",
+		"/C/Apache24/htdocs/parser.class.php",
+		"/C/Apache24/htdocs/attachment.class.php",
+		"/C/Apache24/htdocs/emlparse.php",
+		"/C/Apache24/htdocs/hvs/script/11.txt",
+		"/C/PythonScripts/first.py",
+		"/C/PythonScripts/10i.py",
+		"/C/Apache24/htdocs/image.php",
+		"/C/Apache24/htdocs/test.php",
+		"/C/Apache24/htdocs/newsletter.php",
+		"/C/Apache24/htdocs/euler/8/digits.txt",
+		"/C/Apache24/htdocs/euler/9/index.php",
+		"/C/Apache24/htdocs/euler/8/index.php",
+		"/C/Apache24/htdocs/newsletter.class.php",
+		"/C/PythonScripts/7.py",
+		"/C/Apache24/htdocs/foo.method.php",
+		"/C/Apache24/htdocs/template.html",
+		"/C/Apache24/htdocs/class.php",
+		"/C/PythonScripts/6.py",
+		"/C/Apache24/local.tambourine.phpfogapp.com/tambourine.phpfogapp.com/af-php-myadmin/.htpasswd",
+		"/C/Apache24/htdocs/hvs/index.html",
+		"/C/Apache24/htdocs/newsletter.calss.php",
+		"/C/PythonScripts/4.py",
+		"/C/Apache24/htdocs/jewel/full/scripts/board.js",
+		"/C/Apache24/htdocs/jewel/full/index.html",
+		"/C/Apache24/htdocs/hvs/script/screen.main-menu.js",
+		"/C/Apache24/htdocs/hvs/script/dom.js",
+		"/C/Apache24/htdocs/jewel/full/scripts/screen.hiscore.js",
+		"/C/Users/Aragroth/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Apache24/htdocs/hvs/canvas.html",
+		"/C/Users/Aragroth/AppData/Local/Temp/Rar$DR27.536/pop_game_demo/index.html",
+		"/C/Users/Aragroth/Documents/test.html",
+		"/C/Users/Aragroth/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Aragroth/Documents/project.sublime-project"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" ()",
+			"2",
+			"body",
+			">\n",
+			"canvas",
+			">\n",
+			";\n",
+			"\">\n",
+			"canvas",
+			"red",
+			"text"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 1409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								704,
+								704
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "js/ship.js",
+					"settings":
+					{
+						"buffer_size": 45,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/EaselJS/JavaScript-EaselJS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
