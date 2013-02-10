@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/preloadjs.min.js"></script>
+		<script src="js/easeljs.min.js"></script>
+		<script src="js/ball.js"></script>
+		<script src="js/vector.js"></script>
+		<script src="js/edge.js"></script>
+		<script>
+			var queue = new createjs.LoadQueue(true);
+			queue.addEventListener("complete", handleComplete);
+			queue.loadFile('js/easeljs.min.js');
+
+			var hidden, visibilityChange; 
+			if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+			    hidden = "hidden";
+			    visibilityChange = "visibilitychange";
+			} else if (typeof document.mozHidden !== "undefined") {
+			    hidden = "mozHidden";
+			    visibilityChange = "mozvisibilitychange";
+			} else if (typeof document.msHidden !== "undefined") {
+			    hidden = "msHidden";
+			    visibilityChange = "msvisibilitychange";
+			} else if (typeof document.webkitHidden !== "undefined") {
+			    hidden = "webkitHidden";
+			    visibilityChange = "webkitvisibilitychange";
+			}
+
+			document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+			var balls = [],
+				edges = [],
+				collisions = [],
+				fpsCounter,
+				overtime = 0;
+
+			function init () {
+				stage = new createjs.Stage('mainCanvas');
+				//stage.snapToPixel = true;
+
+				balls.push(
+					new Ball(200, 200, 20, "red", [-80, -80], 10), 
+					new Ball(300, 300, 50, "blue", [30, 60], 19), 
+					new Ball(40, 330, 30, "green", [30, 60], 10),
+					new Ball(300, 30, 10, "yellow", [50, 100], 20),
+					new Ball(250, 40, 20, "yellow", [70, -60], 20),
+					new Ball(100, 70, 25, "pink", [-80, 90], 40),
+					new Ball(300, 200, 35, "pink", [-70, 20], 35));
+
+				edges.push(
+					new Edge([0, 150], [90, 0], "green"),
+					new Edge([1, 1], [399, 1], "green"),
+					new Edge([399, 1], [399, 399], "blue"),
+					new Edge([399, 399], [1, 399], "yellow"),
+					new Edge([1, 399], [1, 1], "pink"));
+
+				balls.forEach(function (ball, index, balls) {
+					stage.addChild(ball);
+					ball.cache(ball.x - ball.radius, ball.y - ball.radius, 2*ball.radius, 2*ball.radius);
+				});
+
+				edges.forEach(function (edge, index, edges) {
+					stage.addChild(edge);
+				});
+
+				
+				//var intervalId = setInterval(run, 0);
+		    	//gameLoop(true);
+		    	
+				createjs.Ticker.addEventListener('tick', loop);
+				createjs.Ticker.setFPS('60');
+
+				fpsCounter = document.getElementById('fps');
+			}
+
+
+			function handleComplete () {
+				//var canvas = document.getElementById('mainCanvas');
+				init();
+				console.log('Załadowano wszystko!');
+			}
+
+			function handleVisibilityChange() {
+				if (document[hidden]) {
+					createjs.Ticker.setPaused(true);
+				} else {
+					createjs.Ticker.setPaused(false);
+				}
+			}
+		   
+			
+			function loop (event) {
+				//console.log(event.delta);
+				if (event.paused)
+					return;
+
+				overtime = event.delta - 1000 / createjs.Ticker.getFPS();
+				event.delta = 1000 / createjs.Ticker.getFPS();
+
+				/*
+				if (event.delta > 1000 / createjs.Ticker.getFPS() + 50) {
+					console.log('Przed:' + event.delta);
+					event.delta = 1000/createjs.Ticker.getFPS();
+					console.log('Po: ' + event.delta);
+				}*/
+
+				fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS());
+
+				balls.forEach(function (ballA, indexA, balls) {
+					balls.forEach(function (ballB, indexB, array) {
+						if (indexB > indexA) {
+							var distance = distanceBetweenBalls(ballA, ballB);
+							if (distance <= (ballA.radius + ballB.radius)) {
+								collisions.push([ballA, ballB]);
+								console.log('Jest kolizja!');
+							}
+						}
+					});
+				});
+
+				edges.forEach(function (edge, index1, edges) {
+					balls.forEach(function (ball, index2, balls) {
+						var distance = distanceFromEdge([ball.x, ball.y], edge);
+
+						if (distance < ball.radius) {
+							collisions.push([edge, ball]);
+						}				
+					});
+				});
+
+				collisions.forEach(function (object, index, collisions) {
+					if ((object[0] instanceof Ball) && (object[1] instanceof Ball)) {
+						var intersection = intersectBallBall(object[0], object[1], event.delta);
+
+						object[0].updatePosition(object[0].previousPosition());
+						object[1].updatePosition(object[1].previousPosition());
+						object[0].moveWithVector(intersection[0]);
+						object[1].moveWithVector(intersection[1]);
+
+						bounceBalls(object[0], object[1]);
+
+					} else if ((object[0] instanceof Edge) && (object[1] instanceof Ball)) {
+						var Ci = intersectEdgeBall(object[0], object[1]);
+
+						object[1].updatePosition([Ci.x, Ci.y]);
+
+						bounceFromEdge(object[0], object[1]);
+					}
+
+					delete collisions[index];
+				});
+
+				balls.forEach(function (ball, index, balls) {
+					ball.move(event.delta);
+				});
+
+				if (overtime > event.delta) {
+					console.log(overtime + ' Skiped rendering!');
+					overtime -= event.delta;
+
+					return;
+				}	
+
+				stage.update();
+			}
+
+			function distanceBetweenBalls (ballA, ballB) {
+				var AB = new Vector([ballA.x - ballB.x, ballA.y - ballB.y]);
+				return Math.sqrt(AB.dot(AB));
+			}
+
+			function distanceFromEdge (point, edge) {
+				return Math.abs(new Vector([point[0] - edge.fromX, point[1] - edge.fromY]).dot(edge.normal));
+			}
+
+			//http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=2
+			function intersectBallBall (ballA, ballB, delta) {
+				var A0 = ballA.previousPosition(), //previous frame ballA pos
+					A1 = [ballA.x, ballA.y], //current frame ballA pos
+					B0 = ballB.previousPosition(), //previous frame ballB pos
+					B1 = [ballB.x, ballB.y], //current frame ballB pos
+					vA = new Vector([A1[0] - A0[0], A1[1] - A0[1]]), //vector between A1 and A0
+					vB = new Vector([B1[0] - B0[0], B1[1] - B0[1]]), //vector beetwen B1 and B0
+					AB = new Vector([B0[0] - A0[0], B0[1] - A0[1]]),
+					vAB = vB.substract(vA, true),
+					rAB = ballA.radius + ballB.radius, //radius sum
+					a = vAB.dot(vAB),
+					b = 2 * vAB.dot(AB),
+					c = AB.dot(AB) - rAB * rAB;
+
+					var quadratic = quadraticFormula(a, b, c);
+
+				if (quadratic) {
+					var intersection = [];
+
+					intersection.push(vA.scale(quadratic[0]));
+					intersection.push(vB.scale(quadratic[0]));
+
+					return intersection;
+				} else {
+					return false;
+				}
+			}
+
+			function intersectEdgeBall (edge, ball) {
+				var C0 = new Vector([ball.prevX, ball.prevY]),
+					C1 = new Vector([ball.x, ball.y]),
+					d0 = distanceFromEdge([C0.x, C0.y], edge),
+					d1 = distanceFromEdge([C1.x, C1.y], edge),
+					ui = (d0 - ball.radius)/(d0 - d1),
+					Ci = C0.scale(1 - ui).add(C1.scale(ui), true);
+
+					return Ci;
+			}
+
+			//http://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=3
+			function bounceBalls (ballA, ballB) {
+				//finding normlized vector between ball's centers
+				var vN = new Vector([ballA.x - ballB.x, ballA.y - ballB.y]);
+				vN.normalize();
+
+				//finding components of velocities along vN
+				var vNA = ballA.velocity.dot(vN, true),
+					vNB = ballB.velocity.dot(vN, true);
+
+				var optimized = (2 * (vNA - vNB)) / (ballA.mass + ballB.mass);
+
+				//calculating new velocities
+				var vAPrim = ballA.velocity.substract(vN.scale(optimized * ballA.mass, true), true),
+					vBPrim = ballB.velocity.add(vN.scale(optimized * ballB.mass, true), true);
+
+				ballA.velocity = vAPrim;
+				ballB.velocity = vBPrim;
+
+				return true;
+			}
+
+			function bounceFromEdge (edge, ball) {
+				ball.velocity.reverseBoth();
+
+				var dot = ball.velocity.dot(edge.normal),
+					refX = 2 * edge.normal.x * dot - ball.velocity.x, //reflection velocity X
+					refY = 2 * edge.normal.y * dot - ball.velocity.y; //reflection velocity Y
+
+				ball.velocity.x = refX;
+				ball.velocity.y = refY;
+				ball.velocity.updatePolarCoords();
+
+				return true;
+			}
+
+			function quadraticFormula (a, b, c) {
+				var x1,
+					x2,
+					delta = b * b - 4 * a * c;
+
+				if (delta >= 0) {
+					var sqrtDelta = Math.sqrt(delta);
+					x1 = (-b + sqrtDelta) / (2 * a);
+					x2 = (-b - sqrtDelta) / (2 * a);
+
+					return (x1 <= x2) ? [x1, x2] : [x2, x1];
+				} else {
+					return false;
+				}
+			}
+		</script>
+		<style type="text/css">
+			body {
+				background: rgb(30,30,30);
+			}
+			canvas {
+				/*border: 1px solid black;*/
+			}
+			.info {
+				padding: 10px 10px;
+				height: 200px;
+				width: 200px;
+				float: right;
+				font-family: calibri;
+				color: white;
+				text-align: right;
+				background: rgb(40,40,40);
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mainCanvas" width="400" height="400">
+		</canvas>
+		<div class="info">
+			FPS <span id="fps"></span>
+		</div>
+		<button onclick="createjs.Ticker.setPaused(true)">Pause</button>
+		<button onclick="createjs.Ticker.setPaused(false)">Play</button>
+	</body>
+</html>

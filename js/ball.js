@@ -34,6 +34,8 @@
     }
 
     Ball.prototype.moveWithVector = function (vector) {
+        this.prevX = this.x;
+        this.prevY = this.y;
     	this.x += vector.x;
     	this.y += vector.y;
     }
