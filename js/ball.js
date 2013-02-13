@@ -1,14 +1,17 @@
-﻿(function (window) {
+﻿//namespace
+this.sd = this.sd || {};
+
+(function () {
 	function Ball (x, y, radius, color, velocity, mass) {
 		this.initialize(x, y, radius, color, velocity, mass);
 	}
 
-    Ball.prototype = new createjs.Shape();
+    var p = Ball.prototype = new createjs.Shape();
 
     // original Shape's constructor:
-    Ball.prototype.Shape_initialize = Ball.prototype.initialize;
+    p.Shape_initialize = p.initialize;
 
-    Ball.prototype.initialize = function (x, y, radius, color, velocity, mass) {
+    p.initialize = function (x, y, radius, color, velocity, mass) {
     	//original Shape's constructor
     	this.Shape_initialize();
 
@@ -19,35 +22,35 @@
     	this.radius = radius;
     	this.mass = mass;
 
-    	if (velocity instanceof Vector) {
+    	if (velocity instanceof sd.Vector) {
     		this.velocity = velocity;
     	} else {
-    		this.velocity = new Vector(velocity);	
+    		this.velocity = new sd.Vector(velocity);	
     	}
-    }
+    };
 
-    Ball.prototype.move = function (delta) {
+    p.move = function (delta) {
         this.prevX = this.x;
         this.prevY = this.y;
     	this.x += delta / 1000 * this.velocity.x;
     	this.y += delta / 1000 * this.velocity.y;
-    }
+    };
 
-    Ball.prototype.moveWithVector = function (vector) {
+    p.moveWithVector = function (vector) {
         this.prevX = this.x;
         this.prevY = this.y;
     	this.x += vector.x;
     	this.y += vector.y;
-    }
+    };
 
-    Ball.prototype.previousPosition = function () {
+    p.previousPosition = function () {
     	return [this.prevX, this.prevY];
-    }
+    };
     
-    Ball.prototype.updatePosition = function (position) {
+    p.updatePosition = function (position) {
     	this.x = position[0];
     	this.y = position[1];
-    }
+    };
 
-    window.Ball = Ball;
-})(window);
+    sd.Ball = Ball;
+})();

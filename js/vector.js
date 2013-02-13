@@ -1,5 +1,8 @@
-﻿(function (window) {
-	function Vector (coords) {
+﻿//namespace
+this.sd = this.sd || {};
+
+(function () {
+	var Vector = function (coords) {
 		if (Object.prototype.toString.call(coords) === "[object Array]") {
 			this.x = coords[0];
 			this.y = coords[1];
@@ -23,7 +26,9 @@
 		}
 	}
 
-	Vector.prototype.rotate = function (angle) {
+	var v = Vector.prototype;
+
+	v.rotate = function (angle) {
 		var fullAngles = Math.abs(angle / 360),
 			newAngle;
 
@@ -48,7 +53,7 @@
 		return this;
 	};
 
-	Vector.prototype.add = function (vector, returnNew) {
+	v.add = function (vector, returnNew) {
 		var returnNew = returnNew || false;
 
 		if (Object.prototype.toString.call(vector) === "[object Array]") {
@@ -64,14 +69,13 @@
 
 				this.updatePolarCoords();
 			}
-
 			return this;
 		} else {
 			throw new Error('Zły parametr.')
 		}
 	};
 
-	Vector.prototype.scale = function (scalar, returnNew) {
+	v.scale = function (scalar, returnNew) {
 		var returnNew = returnNew || false;
 
 		if (returnNew) { //zwraca nowy wektor, nie modyfikuje obecnego
@@ -85,7 +89,7 @@
 		return this;
 	};
 
-	Vector.prototype.normalize = function (returnNew) {
+	v.normalize = function (returnNew) {
 		var returnNew = returnNew || false;
 
 		if (returnNew) { //zwraca nowy wektor, nie modyfikuje obecnego
@@ -101,7 +105,7 @@
 		return this;
 	};
 
-	Vector.prototype.substract = function (vector, returnNew) {
+	v.substract = function (vector, returnNew) {
 		var returnNew = returnNew || false;
 
 		if (typeof vector === 'object') {
@@ -120,7 +124,7 @@
 		}
 	};
 
-	Vector.prototype.dot = function (vector) {
+	v.dot = function (vector) {
 		var scalar;
 
 		if (Object.prototype.toString.call(vector) === "[object Array]") {
@@ -134,7 +138,7 @@
 		return scalar;
 	}
 
-	Vector.prototype.reverseX = function (returnNew) {
+	v.reverseX = function (returnNew) {
 		var returnNew = returnNew || false;
 
 		if (returnNew) {
@@ -145,7 +149,7 @@
 		}
 	}
 
-	Vector.prototype.reverseY = function (returnNew) {
+	v.reverseY = function (returnNew) {
 		var returnNew = returnNew || false;
 
 		if (returnNew) {
@@ -156,7 +160,7 @@
 		}
 	}
 
-	Vector.prototype.reverseBoth = function (returnNew) {
+	v.reverseBoth = function (returnNew) {
 		var returnNew = returnNew || false;
 
 		if (returnNew) {
@@ -168,27 +172,27 @@
 		}
 	}
 
-	Vector.prototype.angleBetween = function (vector) {
+	v.angleBetween = function (vector) {
 
 	}
 
-	Vector.prototype.negate = function (returnNew) {
+	v.negate = function (returnNew) {
 
 	}
 
-	Vector.prototype.clone = function () {
+	v.clone = function () {
 		return new Vector([this.x, this.y]);
 	};
 
-	Vector.prototype.updatePolarCoords = function () {
+	v.updatePolarCoords = function () {
 		this.length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 		this.angle = Math.atan2(this.y, this.x) * 180 / Math.PI;
 	};
 
-	Vector.prototype.updateCartCoords = function () {
+	v.updateCartCoords = function () {
 		this.x = Math.cos(this.angle * Math.PI / 180) * this.length;
 		this.y = (this.angle === 180 || this.angle === -180) ? 0 : Math.sin(this.angle * Math.PI / 180) * this.length
 	};
 
-	window.Vector = Vector;
-})(window);
+	sd.Vector = Vector;
+})();

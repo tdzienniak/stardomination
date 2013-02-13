@@ -1,14 +1,17 @@
-(function (window) {
+//namespace
+this.sd = this.sd || {};
+
+(function () {
 	function Ship (x, y, radius, velocity, mass) {
 		this.initialize(x, y, radius, velocity, mass);
 	}
 
-    Ship.prototype = new createjs.Container();
+    var p = Ship.prototype = new createjs.Container();
 
     // original Shape's constructor:
-    Ship.prototype.Container_initialize = Ship.prototype.initialize;
+    p.Container_initialize = p.initialize;
 
-    Ship.prototype.initialize = function (x, y, radius, velocity, mass) {
+    p.initialize = function (x, y, radius, velocity, mass) {
     	//original Shape's constructor
     	this.Container_initialize();
 
@@ -17,11 +20,30 @@
     	this.radius = radius;
     	this.mass = mass;
 
+        //moduły
+        this.front = new sd.Module(-20, 0, 10, "white", 1);
+        this.rear = new sd.Module(20, 0, 10, "blue", 1);
+        this.rightWing = new sd.Module(0, -20, 10, "red", 1);
+        this.leftWing = new sd.Module(0, 20, 10, "green", 1);
+        this.hull = new sd.Module(0, 0, 10, "black", 1);
+
+        this.modules = [
+            this.front,
+            this.rear,
+            this.rightWing,
+            this.leftWing,
+            this.hull
+        ];
+
+        this.modules.forEach(function (module, index, array) {
+            this.addChild(module);
+        }, this);
+
+        /*
     	this.body = new createjs.Bitmap("img/ship.png");
     	this.body.rotation = -90;
     	this.body.x = -25;
     	this.body.y = 35;
-
 
     	var g = new createjs.Graphics();
         g.beginLinearGradientStroke(["yellow", "rgba(50, 50, 50, 0)"], [0, 0.2], 0, 10, 100, 100).setStrokeStyle(10).moveTo(0, 0).lineTo(70, 0).endStroke();
@@ -30,56 +52,56 @@
         this.engine.visible = false;
 
     	this.addChild(this.engine, this.body);
-
+        */
     	this.rotation = 0;
     	this.targetAngle = 0;
     	this.degPerSecond = 135;
         this.acceleration = 6;
         this.maxVelocity = 150;
 
-    	if (velocity instanceof Vector) {
+    	if (velocity instanceof sd.Vector) {
     		this.velocity = velocity;
     	} else {
-    		this.velocity = new Vector(velocity);	
+    		this.velocity = new sd.Vector(velocity);	
     	}
     }
 
-    Ship.prototype.move = function (delta) {
+    p.move = function (delta) {
         this.prevX = this.x;
         this.prevY = this.y;
     	this.x += delta / 1000 * this.velocity.x;
     	this.y += delta / 1000 * this.velocity.y;
-    }
+    };
 
-    Ship.prototype.accelerate = function (angle) {
+    p.accelerate = function (angle) {
         if (this.velocity.length > this.maxVelocity) {
             this.velocity.length = this.maxVelocity;
             this.velocity.updateCartCoords();
         } else {
-            this.velocity.substract(new Vector({
+            this.velocity.substract(new sd.Vector({
                 length: this.acceleration,
                 angle: angle
             }));
         } 
-    }
+    };
 
-    Ship.prototype.moveWithVector = function (vector) {
+    p.moveWithVector = function (vector) {
         this.prevX = this.x;
         this.prevY = this.y;
     	this.x += vector.x;
     	this.y += vector.y;
-    }
+    };
 
-    Ship.prototype.previousPosition = function () {
+    p.previousPosition = function () {
     	return [this.prevX, this.prevY];
-    }
+    };
     
-    Ship.prototype.updatePosition = function (position) {
+    p.updatePosition = function (position) {
     	this.x = position[0];
     	this.y = position[1];
-    }
+    };
 
-    Ship.prototype.tick = function (event) {
+    p.tick = function (event) {
     	//event.target.targetAngle = event.params[1];
         event.target.rotation = event.params[1];
         /*
@@ -99,7 +121,7 @@
     	} else {
     		return;
     	}*/
-    }
+    };
 
-    window.Ship = Ship;
-})(window);
+    sd.Ship = Ship;
+})();
