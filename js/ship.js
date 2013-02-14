@@ -21,11 +21,11 @@ this.sd = this.sd || {};
     	this.mass = mass;
 
         //moduły
-        this.front = new sd.Module(-20, 0, 10, "white", 1);
-        this.rear = new sd.Module(20, 0, 10, "blue", 1);
-        this.rightWing = new sd.Module(0, -20, 10, "red", 1);
-        this.leftWing = new sd.Module(0, 20, 10, "green", 1);
-        this.hull = new sd.Module(0, 0, 10, "black", 1);
+        this.front = new sd.Module(-20, 0, 20, "white", 1, "Dziób");
+        this.rear = new sd.Module(10, 0, 10, "blue", 1, "Rufa");
+        this.rightWing = new sd.Module(0, -20, 15, "red", 1, "Prawe skrzydło");
+        this.leftWing = new sd.Module(0, 20, 15, "green", 1, "Lewe skrzydło");
+        this.hull = new sd.Module(0, 0, 10, "black", 1, "Kadłub");
 
         this.modules = [
             this.front,
@@ -66,9 +66,17 @@ this.sd = this.sd || {};
     	}
     }
 
-    p.move = function (delta) {
+    p.move = function (delta, stage) {
+        var stage = stage;
+
         this.prevX = this.x;
         this.prevY = this.y;
+
+        this.modules.forEach(function (module, index, array) {
+            var modulePrev = this.localToLocal(module.x, module.y, stage);
+            module.prevX = modulePrev.x;
+            module.prevY = modulePrev.y;
+        }, this);
     	this.x += delta / 1000 * this.velocity.x;
     	this.y += delta / 1000 * this.velocity.y;
     };
@@ -121,6 +129,93 @@ this.sd = this.sd || {};
     	} else {
     		return;
     	}*/
+    };
+
+    p.onCollision = function (object, params) {
+        var params = params || {};
+        var collisions = [];
+
+        if (object instanceof sd.Ball) {
+            this.modules.forEach(function (module, index, modules) {
+                var moduleGlobalCoords = this.localToLocal(module.x, module.y, params.stage); //{x: this.x + module.x, y: this.y + module.y};
+                var distance = sd.Collisions.distanceBetweenPoints([object.x, object.y], [moduleGlobalCoords.x, moduleGlobalCoords.y]);
+
+                if (distance <= object.radius + module.radius) {
+                    collisions.push([{
+                        x: moduleGlobalCoords.x,
+                        y: moduleGlobalCoords.y,
+                        radius: module.radius,
+                        prevX: module.prevX,
+                        prevY: module.prevY,
+                        mass: this.mass,
+                        velocity: this.velocity
+                    }, object]);
+                    
+                    module.onHit(object);
+                    if (module.hp <= 0) {
+                        delete modules[index];
+                        this.removeChildAt(this.getChildIndex(module));
+                        return;
+                    }
+                }
+            }, this);
+
+            collisions.forEach(function (object, index, collisions) {
+                    var intersection = sd.Collisions.intersectObjObj(object[0], object[1]);
+
+                    this.updatePosition(this.previousPosition());
+                    object[1].updatePosition(object[1].previousPosition());
+                    this.moveWithVector(intersection[0]);
+                    object[1].moveWithVector(intersection[1]);
+
+                    var newVelocities = sd.Collisions.bounceObj(object[0], object[1]);
+
+                    this.velocity = newVelocities[0];
+                    object[1].velocity = newVelocities[1];
+
+                    delete collisions[index];
+            }, this);
+        } else if (object instanceof sd.Edge) {
+            var Ci = sd.Collisions.intersectEdgeObj(object, this);
+
+            this.updatePosition([Ci.x, Ci.y]);
+
+            var newVelocity = sd.Collisions.bounceFromEdge(object, this);
+
+            this.velocity = newVelocity;
+            /*
+             this.modules.forEach(function (module, index, modules) {
+                var moduleGlobalCoords = this.localToLocal(module.x, module.y, params.stage); //{x: this.x + module.x, y: this.y + module.y};
+                var distance = sd.Collisions.distanceToEdge([moduleGlobalCoords.x, moduleGlobalCoords.y], object);
+
+                if (distance <= module.radius) {
+                    collisions.push([{
+                        x: moduleGlobalCoords.x,
+                        y: moduleGlobalCoords.y,
+                        radius: module.radius,
+                        prevX: module.prevX,
+                        prevY: module.prevY,
+                        velocity: this.velocity
+                    }, object]);
+                }
+            }, this);
+
+            collisions.forEach(function (object, index, collisions) {
+                    var Ci = sd.Collisions.intersectEdgeObj(object[1], object[0]);
+
+                    this.updatePosition([Ci.x, Ci.y]);
+
+                    var newVelocity = sd.Collisions.bounceFromEdge(object[1], object[0]);
+
+                    this.velocity = newVelocity;
+
+                    delete collisions[index];
+            }, this);*/
+        } else if (object instanceof sd.Ship) {
+
+        } else {
+            return;
+        }
     };
 
     sd.Ship = Ship;

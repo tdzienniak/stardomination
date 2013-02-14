@@ -25,5 +25,17 @@ this.sd = this.sd || {};
         this.normal = new sd.Vector([this.toX - this.fromX, this.toY - this.fromY]).rotate(90).normalize();
     };
 
+    p.onCollision = function (object, params) {
+        var params = params || {};
+
+        if (object instanceof sd.Ball) {
+            object.onCollision(this, params);
+        } else if (object instanceof sd.Ship) {
+            object.onCollision(this, params);
+        } else {
+            return;
+        }
+    }
+
     sd.Edge = Edge;
 })();

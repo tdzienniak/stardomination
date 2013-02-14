@@ -52,5 +52,35 @@ this.sd = this.sd || {};
     	this.y = position[1];
     };
 
+    p.onCollision = function (object, params) {
+        var params = params || {};
+
+        if (object instanceof sd.Ball) {
+            var intersection = sd.Collisions.intersectObjObj(this, object);
+
+            this.updatePosition(this.previousPosition());
+            object.updatePosition(object.previousPosition());
+            this.moveWithVector(intersection[0]);
+            object.moveWithVector(intersection[1]);
+
+            var newVelocities = sd.Collisions.bounceObj(this, object);
+
+            this.velocity = newVelocities[0];
+            object.velocity = newVelocities[1];
+        } else if (object instanceof sd.Edge) {
+            var Ci = sd.Collisions.intersectEdgeObj(object, this);
+
+            this.updatePosition([Ci.x, Ci.y]);
+
+            var newVelocity = sd.Collisions.bounceFromEdge(object, this);
+
+            this.velocity = newVelocity;
+        } else if (object instanceof sd.Ship) {
+            object.onCollision(this, params);
+        } else {
+            return;
+        }
+    };
+
     sd.Ball = Ball;
 })();

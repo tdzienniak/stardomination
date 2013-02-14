@@ -36,12 +36,12 @@ sd.Game = (function () {
         mouseStage = new createjs.Stage('mouseTest');
         mousePosition = document.getElementById('mousePosition');
 
-        ship = new sd.Ship(400, 300, 30, [40,30], 1);
+        ship = new sd.Ship(400, 300, 40, [40,30], 1);
         //mouseStage.addChild(ship);
         bitmap = new createjs.Bitmap("img/back.jpg");
         bitmap.x -= 200;
         bitmap.y -= 200;
-
+        
         stage.addEventListener("stagemousemove", function (event) {
             var localCoords = stage.globalToLocal(event.stageX, event.stageY);
             shipDirection = new sd.Vector([localCoords.x - ship.x, localCoords.y - ship.y]);
@@ -65,13 +65,15 @@ sd.Game = (function () {
 
 
         balls.push(
-            new sd.Ball(500, 300, 20, "red", [-80, -80], 1), 
-            new sd.Ball(300, 300, 50, "blue", [30, 60], 1), 
-            new sd.Ball(40, 330, 30, "green", [30, 60], 1),
+            new sd.Ball(500, 300, 10, "red", [-80, -80], 1), 
+            new sd.Ball(300, 300, 10, "blue", [30, 60], 1), 
+            new sd.Ball(40, 330, 10, "green", [30, 60], 1),
             new sd.Ball(300, 30, 10, "yellow", [50, 100], 2),
-            new sd.Ball(250, 40, 20, "yellow", [70, -60], 2),
-            new sd.Ball(100, 70, 25, "pink", [-80, 90], 4),
-            new sd.Ball(300, 200, 35, "pink", [-70, 20], 3));
+            new sd.Ball(250, 40, 10, "yellow", [70, -60], 2),
+            new sd.Ball(100, 70, 15, "pink", [-80, 90], 4),
+            new sd.Ball(300, 200, 15, "pink", [-70, 20], 3),
+            new sd.Ball(100, 200, 10, "pink", [-80, 20], 3),
+            new sd.Ball(700, 200, 10, "pink", [-70, 20], 1));
 
         edges.push(
             //new Edge([0, 150], [90, 0], "green"),
@@ -158,48 +160,7 @@ sd.Game = (function () {
         });
 
         collisions.forEach(function (object, index, collisions) {
-            if ((object[0] instanceof sd.Ball) && (object[1] instanceof sd.Ball)) {
-                var intersection = coll.intersectObjObj(object[0], object[1]);
-
-                object[0].updatePosition(object[0].previousPosition());
-                object[1].updatePosition(object[1].previousPosition());
-                object[0].moveWithVector(intersection[0]);
-                object[1].moveWithVector(intersection[1]);
-
-                var newVelocities = coll.bounceObj(object[0], object[1]);
-
-                object[0].velocity = newVelocities[0];
-                object[1].velocity = newVelocities[1];
-            } else if ((object[0] instanceof sd.Edge) && (object[1] instanceof sd.Ball)) {
-                var Ci = coll.intersectEdgeObj(object[0], object[1]);
-
-                object[1].updatePosition([Ci.x, Ci.y]);
-
-                var newVelocity = coll.bounceFromEdge(object[0], object[1]);
-
-                object[1].velocity = newVelocity;
-            } else if ((object[0] instanceof sd.Ball) && (object[1] instanceof sd.Ship)) {
-                var intersection = coll.intersectObjObj(object[0], object[1]);
-
-                object[0].updatePosition(object[0].previousPosition());
-                object[1].updatePosition(object[1].previousPosition());
-                object[0].moveWithVector(intersection[0]);
-                object[1].moveWithVector(intersection[1]);
-
-                var newVelocities = coll.bounceObj(object[0], object[1]);
-
-                object[0].velocity = newVelocities[0];
-                object[1].velocity = newVelocities[1];
-            } else if ((object[0] instanceof sd.Edge) && (object[1] instanceof sd.Ship)) {
-                var Ci = coll.intersectEdgeObj(object[0], object[1]);
-
-                object[1].updatePosition([Ci.x, Ci.y]);
-
-                var newVelocity = coll.bounceFromEdge(object[0], object[1]);
-
-                object[1].velocity = newVelocity;
-            }
-
+            object[0].onCollision(object[1], {stage: stage});
             delete collisions[index];
         });
 
@@ -212,7 +173,7 @@ sd.Game = (function () {
             console.log('Przyspieszaj!');
         }
 
-        ship.move(event.delta);
+        ship.move(event.delta, stage);
 
         if (overtime > event.delta) {
             console.log(overtime + ' Skiped rendering!');

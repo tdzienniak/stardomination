@@ -4,12 +4,248 @@
 		"selected_items":
 		[
 			[
-				"speed",
-				"speedX"
+				"new",
+				"newVelocity"
+			],
+			[
+				"ve",
+				"velocity"
+			],
+			[
+				"ne",
+				"newVelocities"
+			],
+			[
+				"co",
+				"collisions"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"dis",
+				"distanceToEdge"
+			],
+			[
+				"bou",
+				"bounceFromEdge"
+			],
+			[
+				"bo",
+				"bounceObj"
+			],
+			[
+				"in",
+				"intersectEdgeObj"
+			],
+			[
+				"obj",
+				"obj"
+			],
+			[
+				"vB",
+				"vBPrim"
+			],
+			[
+				"vA",
+				"vAPrim"
+			],
+			[
+				"prev",
+				"prevX"
+			],
+			[
+				"root",
+				"roots"
+			],
+			[
+				"ret",
+				"return	@return"
+			],
+			[
+				"re",
+				"return	@return"
+			],
+			[
+				"pa",
+				"param	@param"
+			],
+			[
+				"au",
+				"author	@author"
+			],
+			[
+				"con",
+				"container"
+			],
+			[
+				"shi",
+				"shipDirection"
+			],
+			[
+				"acc",
+				"accelerationAngle"
+			],
+			[
+				"ac",
+				"accelerationAngle"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"ce",
+				"createjs"
 			],
 			[
 				"lo",
-				"log"
+				"localCoords"
+			],
+			[
+				"upda",
+				"update"
+			],
+			[
+				"ove",
+				"overalDelta"
+			],
+			[
+				"han",
+				"handleMouseMove"
+			],
+			[
+				"di",
+				"direction"
+			],
+			[
+				"li",
+				"lineTo"
+			],
+			[
+				"mo",
+				"mouseStage"
+			],
+			[
+				"te",
+				"textContent"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"mou",
+				"mousePosition"
+			],
+			[
+				"mous",
+				"mousePosition"
+			],
+			[
+				"ma",
+				"maxFrameSkip"
+			],
+			[
+				"t",
+				"time"
+			],
+			[
+				"tim",
+				"time"
+			],
+			[
+				"ge",
+				"getTime"
+			],
+			[
+				"upd",
+				"update"
+			],
+			[
+				"ti",
+				"ticksPerSecond"
+			],
+			[
+				"g",
+				"getMeasuredFPS"
+			],
+			[
+				"set",
+				"setPaused"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"fo",
+				"forEach"
+			],
+			[
+				"col",
+				"collision"
+			],
+			[
+				"coll",
+				"collisions"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"ed",
+				"edge1"
+			],
+			[
+				"edg",
+				"edges"
+			],
+			[
+				"u",
+				"updatePolarCoords"
+			],
+			[
+				"rev",
+				"reverseY"
+			],
+			[
+				"pr",
+				"prototype"
+			],
+			[
+				"v",
+				"velocity"
+			],
+			[
+				"ba",
+				"ball1"
+			],
+			[
+				"i",
+				"intersectBallEdge"
+			],
+			[
+				"up",
+				"updateCartCoords"
+			],
+			[
+				"fu",
+				"fullAngles"
+			],
+			[
+				"fps",
+				"fpsCounter"
+			],
+			[
+				"from",
+				"fromX"
+			],
+			[
+				"speed",
+				"speedX"
 			],
 			[
 				"time",
@@ -34,10 +270,6 @@
 			[
 				"mar",
 				"margin"
-			],
-			[
-				"di",
-				"display"
 			],
 			[
 				"vide",
@@ -72,14 +304,6 @@
 				"margin-left"
 			],
 			[
-				"bo",
-				"border-radius"
-			],
-			[
-				"li",
-				"link"
-			],
-			[
 				"borde",
 				"border"
 			],
@@ -96,16 +320,8 @@
 				"textarea"
 			],
 			[
-				"fo",
-				"font-family"
-			],
-			[
 				"bor",
 				"border-radius"
-			],
-			[
-				"ba",
-				"background"
 			],
 			[
 				"td",
@@ -200,10 +416,6 @@
 				"string"
 			],
 			[
-				"fu",
-				"function_exists"
-			],
-			[
 				"call_fun",
 				"call_user_func_array"
 			],
@@ -252,10 +464,6 @@
 				"daneUzytkownika"
 			],
 			[
-				"co",
-				"counter"
-			],
-			[
 				"can",
 				"canJoin"
 			],
@@ -300,100 +508,12 @@
 				"stability"
 			],
 			[
-				"re",
-				"restore"
-			],
-			[
 				"ener",
 				"energyFields"
 			],
 			[
 				"draw",
 				"drawBackground"
-			],
-			[
-				"gr",
-				"gradient"
-			],
-			[
-				"fill",
-				"fillStyle"
-			],
-			[
-				"ge",
-				"getEnergyFields"
-			],
-			[
-				"get",
-				"getBlockades"
-			],
-			[
-				"en",
-				"energyFields"
-			],
-			[
-				"se",
-				"settings"
-			],
-			[
-				"pri",
-				"printDiffs"
-			],
-			[
-				"pu",
-				"putParticle"
-			],
-			[
-				"par",
-				"particles"
-			],
-			[
-				"in",
-				"inline-block"
-			],
-			[
-				"border-r",
-				"border-right"
-			],
-			[
-				"ene",
-				"energy"
-			],
-			[
-				"from",
-				"fromY"
-			],
-			[
-				"len",
-				"length"
-			],
-			[
-				"print",
-				"printJoints"
-			],
-			[
-				"fro",
-				"fromX"
-			],
-			[
-				"join",
-				"joints"
-			],
-			[
-				"t",
-				"type"
-			],
-			[
-				"for",
-				"for	for (…) {…}"
-			],
-			[
-				"newP",
-				"newParticleEnergy"
-			],
-			[
-				"fon",
-				"font-family"
 			]
 		]
 	},
@@ -403,18 +523,63 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 1409,
+				"buffer_size": 3656,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "(function () {\n	function Ship () {\n	\n	}\n})();",
-			"file": "js/ship.js",
-			"file_size": 3,
-			"file_write_time": 130040639772427733,
+			"file": "js/main.js",
 			"settings":
 			{
-				"buffer_size": 45,
+				"buffer_size": 8262,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/collisions.js",
+			"settings":
+			{
+				"buffer_size": 5516,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/ship.js",
+			"settings":
+			{
+				"buffer_size": 3050,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/module.js",
+			"settings":
+			{
+				"buffer_size": 478,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/edge.js",
+			"settings":
+			{
+				"buffer_size": 702,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/vector.js",
+			"settings":
+			{
+				"buffer_size": 4474,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/ball.js",
+			"settings":
+			{
+				"buffer_size": 1327,
 				"line_ending": "Windows"
 			}
 		}
@@ -422,15 +587,19 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 35.0,
+		"height": 335.0,
 		"selected_items":
 		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
 			[
 				"packa",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 402.0
+		"width": 386.0
 	},
 	"console":
 	{
@@ -447,6 +616,7 @@
 	},
 	"file_history":
 	[
+		"/C/Apache24/stardomination/demo.html",
 		"/C/Apache24/htdocs/universe/universe.html",
 		"/C/Apache24/htdocs/hvs/hotvscold.sublime-project",
 		"/C/Apache24/local.tomdrozd/new2.html",
@@ -509,6 +679,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Edge",
+			"Ball",
+			"Ship.prototype",
+			"Ball.prototype",
+			"Edge.prototype",
+			"ball",
+			"properities",
+			"ball",
+			"return",
+			"	        ",
+			"quadratic",
+			"ball",
+			"Vector",
+			"v",
+			"Vector.prototype",
+			"Ball",
+			"this",
+			"ball2",
+			"Ball",
 			" ()",
 			"2",
 			"body",
@@ -537,7 +726,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -545,20 +734,22 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 1409,
+						"buffer_size": 3656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								704,
-								704
+								347,
+								347
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -568,27 +759,190 @@
 				},
 				{
 					"buffer": 1,
-					"file": "js/ship.js",
+					"file": "js/main.js",
 					"settings":
 					{
-						"buffer_size": 45,
+						"buffer_size": 8262,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								36,
-								36
+								3435,
+								3435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1800.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "js/collisions.js",
+					"settings":
+					{
+						"buffer_size": 5516,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								471,
+								471
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 50.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/ship.js",
+					"settings":
+					{
+						"buffer_size": 3050,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2240,
+								2240
 							]
 						],
 						"settings":
 						{
 							"auto_name": "",
-							"syntax": "Packages/EaselJS/JavaScript-EaselJS.tmLanguage"
+							"syntax": "Packages/EaselJS/JavaScript-EaselJS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 846.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/module.js",
+					"settings":
+					{
+						"buffer_size": 478,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								466,
+								466
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "js/edge.js",
+					"settings":
+					{
+						"buffer_size": 702,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								133,
+								133
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "js/vector.js",
+					"settings":
+					{
+						"buffer_size": 4474,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1840,
+								1840
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/ball.js",
+					"settings":
+					{
+						"buffer_size": 1327,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								945,
+								945
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 288.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
