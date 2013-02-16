@@ -23,7 +23,7 @@ sd.Game = (function () {
         mousePosition,
         overtime = 0,
         ship,
-        bitmap,
+        backgrounds,
         maxFrameSkip = 5,
         skipedFrames = 0,
         shipDirection = new sd.Vector([0,0]),
@@ -31,6 +31,7 @@ sd.Game = (function () {
         accelerationAngle;
 
     var init = function () {
+
         stage = new createjs.Stage('mainCanvas');
 
         mouseStage = new createjs.Stage('mouseTest');
@@ -38,9 +39,17 @@ sd.Game = (function () {
 
         ship = new sd.Ship(400, 300, 40, [40,30], 1);
         //mouseStage.addChild(ship);
-        bitmap = new createjs.Bitmap("img/back.jpg");
+        /*bitmap = new createjs.Bitmap("img/back.jpg");
         bitmap.x -= 200;
-        bitmap.y -= 200;
+        bitmap.y -= 200;*/
+
+        /* kontenery z tłem i cząsteczkami */
+        backgrounds = [
+            new sd.Background("background", 0.2),
+            new sd.Background("spaceNear", 0.8),
+            new sd.Background("spaceMiddle", 0.6),
+            new sd.Background("spaceFar", 0.4)
+        ];
         
         stage.addEventListener("stagemousemove", function (event) {
             var localCoords = stage.globalToLocal(event.stageX, event.stageY);
@@ -82,7 +91,7 @@ sd.Game = (function () {
             new sd.Edge([800, 600], [0, 600], "yellow"),
             new sd.Edge([0, 600], [0, 0], "pink"));
 
-        stage.addChild(bitmap, ship);
+        stage.addChild(/*bitmap,*/ ship);
 
         balls.forEach(function (ball, index, balls) {
             stage.addChild(ball);
@@ -188,7 +197,15 @@ sd.Game = (function () {
         stage.x -= event.delta / 1000 * ship.velocity.x;
         stage.y -= event.delta / 1000 * ship.velocity.y;
 
+        moveBackground(ship.velocity, event.delta);
+
         stage.update(event.delta, shipDirection.angle);
+    }
+
+    function moveBackground (velocity, delta) {
+        backgrounds.forEach(function (background, index, backgrounds) {
+            background.move(velocity, delta);
+        });
     }
 
 	return {

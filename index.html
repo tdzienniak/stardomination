@@ -2,19 +2,21 @@
 <html>
     <head>
         <script src="js/preloadjs.min.js"></script>
-        <script src="js/easeljs.min.js"></script>
-        <script src="js/ball.js"></script>
-        <script src="js/module.js"></script>
-        <script src="js/vector.js"></script>
-        <script src="js/edge.js"></script>
-        <script src="js/ship.js"></script>
-        <script src="js/collisions.js"></script>
-
-        <script src="js/main.js"></script>
         <script>
             var queue = new createjs.LoadQueue(true);
             queue.addEventListener("complete", handleComplete);
-            queue.loadFile('js/easeljs.min.js');
+            queue.addEventListener("fileload", handleFileLoad);
+            queue.loadManifest([
+                'js/easeljs.min.js',
+                'js/vector.js',
+                'js/ball.js',
+                'js/module.js',
+                'js/edge.js',
+                'js/ship.js',
+                'js/collisions.js',
+                'js/background.js',
+                'js/main.js'
+                ]);
 
             /*  Wykorzystanie Page Visibility API do pauzowania gry kiedy karta, w której jest otwarta traci "focus"
                 Kod pochodzi ze strony https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API */
@@ -35,14 +37,24 @@
 
             document.addEventListener(visibilityChange, handleVisibilityChange, false);
 
-            function handleComplete () {
+            function handleComplete (event) {
                 //var canvas = document.getElementById('mainCanvas');
                 var settings = {};
                 sd.Game.init();
                 console.log('Załadowano wszystko!');
             }
 
-            function handleVisibilityChange() {
+            function handleFileLoad (event) {
+                var item = event.item;
+                var type = item.type;
+
+                if (type == createjs.LoadQueue.JAVASCRIPT) {
+                    document.body.appendChild(event.result);
+                    setTimeout(function () {}, 1000);
+                }
+            }
+
+            function handleVisibilityChange () {
                 if (document[hidden]) {
                     createjs.Ticker.setPaused(true);
                 } else {
@@ -55,7 +67,9 @@
                 background: url('img/debut_dark.png') repeat;
             }
             canvas {
-                background: black;
+                /*background: black;*/
+                position: relative;
+                z-index: 10000;
             }
 
             .info {
@@ -78,6 +92,39 @@
                 border: 5px solid rgba(100,100,100,0.7);
                 border-radius: 5px;
                 box-shadow: 3px 3px 5px black;
+                position: relative;
+            }
+
+            #background {
+                background: url('img/back.jpg') repeat;
+                height: 600px;
+                width: 800px;
+                /*overflow: visible;*/
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 500;
+            }
+
+            #spaceNear, #spaceMiddle, #spaceFar {
+                height: 600px;
+                width: 800px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: 600;
+            }
+
+            #spaceNear {
+                background: url('img/spaceNear.png') repeat;
+            }
+
+            #spaceFar {
+                background: url('img/spaceFar.png') repeat;
+            }
+
+            #spaceMiddle {
+                background: url('img/spaceMiddle.png') repeat;
             }
         </style>
     </head>
@@ -85,6 +132,14 @@
         <div id="container">
             <canvas id="mainCanvas" width="800" height="600">
             </canvas>
+            <div id="background">
+            </div>
+            <div id="spaceNear">
+            </div>
+            <div id="spaceMiddle">
+            </div>
+            <div id="spaceFar">
+            </div>
         </div>
          <!--<canvas id="mouseTest" width="400" height="400">
         </canvas>-->

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"o",
+				"onCollision"
+			],
+			[
 				"new",
 				"newVelocity"
 			],
@@ -510,10 +514,6 @@
 			[
 				"ener",
 				"energyFields"
-			],
-			[
-				"draw",
-				"drawBackground"
 			]
 		]
 	},
@@ -523,7 +523,15 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 3656,
+				"buffer_size": 4934,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Apache24/conf/httpd.conf",
+			"settings":
+			{
+				"buffer_size": 20322,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,7 +539,7 @@
 			"file": "js/main.js",
 			"settings":
 			{
-				"buffer_size": 8262,
+				"buffer_size": 7055,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +555,7 @@
 			"file": "js/ship.js",
 			"settings":
 			{
-				"buffer_size": 3050,
+				"buffer_size": 7572,
 				"line_ending": "Windows"
 			}
 		},
@@ -555,15 +563,33 @@
 			"file": "js/module.js",
 			"settings":
 			{
-				"buffer_size": 478,
+				"buffer_size": 1016,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 1 file for \"js\"\n\nUnable to open /C/Apache24/stardomination\n0 matches across 0 files\n",
+			"settings":
+			{
+				"buffer_size": 94,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 13149,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "js/edge.js",
 			"settings":
 			{
-				"buffer_size": 702,
+				"buffer_size": 1021,
 				"line_ending": "Windows"
 			}
 		},
@@ -579,7 +605,7 @@
 			"file": "js/ball.js",
 			"settings":
 			{
-				"buffer_size": 1327,
+				"buffer_size": 2347,
 				"line_ending": "Windows"
 			}
 		}
@@ -592,6 +618,10 @@
 		[
 			[
 				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: t",
 				"Package Control: Install Package"
 			],
 			[
@@ -599,7 +629,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 386.0
+		"width": 522.0
 	},
 	"console":
 	{
@@ -616,6 +646,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/User/Plain text.sublime-settings",
+		"/C/Apache24/conf/extra/httpd-vhosts.conf",
+		"/I/Apache24/conf/extra/httpd-vhosts.conf",
+		"/C/Windows/System32/Drivers/etc/hosts",
+		"/C/Users/Tymoteusz/Desktop/hosts",
 		"/C/Apache24/stardomination/demo.html",
 		"/C/Apache24/htdocs/universe/universe.html",
 		"/C/Apache24/htdocs/hvs/hotvscold.sublime-project",
@@ -672,6 +707,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"C:\\Apache24\\stardomination"
 		]
 	},
 	"find_state":
@@ -679,6 +715,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"js",
 			"Edge",
 			"Ball",
 			"Ship.prototype",
@@ -726,7 +763,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -734,57 +771,88 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 3656,
+						"buffer_size": 4934,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								347,
-								347
+								4465,
+								4465
 							]
 						],
 						"settings":
 						{
+							"is_xml": false,
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 18.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "js/main.js",
+					"file": "/C/Apache24/conf/httpd.conf",
 					"settings":
 					{
-						"buffer_size": 8262,
+						"buffer_size": 20322,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3435,
-								3435
+								11256,
+								11256
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1800.0,
+						"translation.y": 492.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "js/main.js",
+					"settings":
+					{
+						"buffer_size": 7055,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3736,
+								3736
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1692.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "js/collisions.js",
 					"settings":
 					{
@@ -795,34 +863,35 @@
 						"selection":
 						[
 							[
-								471,
-								471
+								945,
+								945
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 50.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "js/ship.js",
 					"settings":
 					{
-						"buffer_size": 3050,
+						"buffer_size": 7572,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2240,
-								2240
+								0,
+								0
 							]
 						],
 						"settings":
@@ -833,51 +902,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 846.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/module.js",
-					"settings":
-					{
-						"buffer_size": 478,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								466,
-								466
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 252.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "js/edge.js",
+					"file": "js/module.js",
 					"settings":
 					{
-						"buffer_size": 702,
+						"buffer_size": 1016,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								133,
-								133
+								0,
+								0
 							]
 						],
 						"settings":
@@ -894,6 +937,93 @@
 				},
 				{
 					"buffer": 6,
+					"settings":
+					{
+						"buffer_size": 94,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								68,
+								68
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+					"settings":
+					{
+						"buffer_size": 13149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2214.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "js/edge.js",
+					"settings":
+					{
+						"buffer_size": 1021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "js/vector.js",
 					"settings":
 					{
@@ -920,19 +1050,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 10,
 					"file": "js/ball.js",
 					"settings":
 					{
-						"buffer_size": 1327,
+						"buffer_size": 2347,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								945,
-								945
+								0,
+								0
 							]
 						],
 						"settings":
