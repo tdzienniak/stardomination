@@ -2,7 +2,7 @@
 <html>
     <head>
         <script src="js/preloadjs.min.js"></script>
-        <script src="js/easeljs.min.js"></script>
+        <!--<script src="js/easeljs.min.js"></script>
         <script src="js/CSSClass.min.js"></script>
         <script src="js/vector.js"></script>
         <script src="js/ball.js"></script>
@@ -14,46 +14,63 @@
         <script src="js/main.js"></script>
         <script src="js/menu-screen.js"></script>
         <script src="js/configuration-screen.js"></script>
-        <script src="js/game-screen.js"></script>
+        <script src="js/game-screen.js"></script>-->
         <script>
-            var queue = new createjs.LoadQueue(true);
-            queue.addEventListener("complete", handleComplete);
-            queue.addEventListener("fileload", handleFileLoad);
-            queue.loadManifest([
-                'js/alert.js',
-                /*'js/easeljs.min.js',
-                'js/CSSClass.min.js',
-                'js/vector.js',
-                'js/ball.js',
-                'js/module.js',
-                'js/edge.js',
-                'js/ship.js',
-                'js/collisions.js',
-                'js/background.js',
-                'js/main.js',
-                'js/menu-screen.js',
-                'js/configuration-screen.js',
-                'js/game-screen.js'*/
-                ]);
+            var hidden, visibilityChange;
 
-            /*  Wykorzystanie Page Visibility API do pauzowania gry kiedy karta, w której jest otwarta traci "focus"
-                Kod pochodzi ze strony https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API */
-            var hidden, visibilityChange; 
-            if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
-                hidden = "hidden";
-                visibilityChange = "visibilitychange";
-            } else if (typeof document.mozHidden !== "undefined") {
-                hidden = "mozHidden";
-                visibilityChange = "mozvisibilitychange";
-            } else if (typeof document.msHidden !== "undefined") {
-                hidden = "msHidden";
-                visibilityChange = "msvisibilitychange";
-            } else if (typeof document.webkitHidden !== "undefined") {
-                hidden = "webkitHidden";
-                visibilityChange = "webkitvisibilitychange";
-            }
+            window.addEventListener("load", function () {
+                init();
+            }, false);
 
             document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+            function init () {
+                var queue = new createjs.LoadQueue(true);
+                queue.addEventListener("complete", handleComplete);
+                queue.addEventListener("fileload", handleFileLoad);
+                queue.addEventListener("progress", handleLoadProgress);
+                queue.loadManifest([
+                    //[CSS]
+                    'css/style-common.css',
+                    //[JavaScript] libraries
+                    'js/easeljs.min.js',
+                    'js/CSSClass.min.js',
+                    'js/zest.js',
+                    //[JavaScript] game files
+                    'js/vector.js',
+                    'js/ball.js',
+                    'js/module.js',
+                    'js/edge.js',
+                    'js/ship.js',
+                    'js/collisions.js',
+                    'js/background.js',
+                    'js/game.js',
+                    'js/menu-screen.js',
+                    'js/configuration-screen.js',
+                    'js/game-screen.js',
+                    //[Image] images
+                    'img/back.jpg',
+                    'img/back2.jpg',
+                    'img/back4.jpg'
+                ]);
+
+                /*  Wykorzystanie Page Visibility API do pauzowania gry kiedy karta, w której jest otwarta traci "focus"
+                    Kod pochodzi ze strony https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API */
+                 
+                if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+                    hidden = "hidden";
+                    visibilityChange = "visibilitychange";
+                } else if (typeof document.mozHidden !== "undefined") {
+                    hidden = "mozHidden";
+                    visibilityChange = "mozvisibilitychange";
+                } else if (typeof document.msHidden !== "undefined") {
+                    hidden = "msHidden";
+                    visibilityChange = "msvisibilitychange";
+                } else if (typeof document.webkitHidden !== "undefined") {
+                    hidden = "webkitHidden";
+                    visibilityChange = "webkitvisibilitychange";
+                }
+            }
 
             function handleComplete (event) {
                 //var canvas = document.getElementById('mainCanvas');
@@ -67,10 +84,18 @@
                 var item = event.item;
                 var type = item.type;
 
-                if (type == createjs.LoadQueue.JAVASCRIPT) {
-                    document.body.appendChild(event.result);
+                if (type === createjs.LoadQueue.CSS) {
+                    (document.head || document.getElementsByTagName("head")[0]).appendChild(event.result);
+                } else if (type === createjs.LoadQueue.JAVASCRIPT) {
+                    (document.body || document.getElementsByTagName("body")[0]).appendChild(event.result);
                     //setTimeout(function () {}, 1000);
                 }
+            }
+
+            function handleLoadProgress (event) {
+                var progressBar = document.getElementsByClassName("progress-bar")["0"];
+                //console.log(event.loaded * 100);
+                progressBar.style.width = Math.round(event.loaded * 400) + "px";
             }
 
             function handleVisibilityChange () {
@@ -82,297 +107,16 @@
             }
         </script>
         <style type="text/css">
-            body {
-                background: url('img/debut_dark.png') repeat;
-            }
-            canvas {
-                /*background: black;*/
-                position: relative;
-                z-index: 10000;
-            }
-
-            @font-face {
-				font-family: 'spaceman';
-				src: url('fonts/SPACEMAN.ttf') format('truetype');
-			}
-			 @font-face {
-				font-family: 'NiseJSRF';
-				src: url('fonts/NiseJSRF.ttf') format('truetype');
-			}
-
-            #fps {
-                font-family: calibri, sans-serif;
-                color: white;
-            }
-
-            .info {
-                padding: 10px 10px;
-                height: 200px;
-                width: 200px;
-                font-family: calibri;
-                color: white;
-                text-align: left;
-                background: rgb(40,40,40);
-                position: absolute;
-                top: 10px;
-                left: 10px;
-            }
-
-            .screen {
-                height: 600px;
-                width: 800px;
-                margin: 10px auto;
-                border: 5px solid rgba(100,100,100,0.7);
-                border-radius: 5px;
-                box-shadow: 3px 3px 5px black;
-                position: relative;
-                display: none;
-                cursor: url('cursors/cursor.cur'), default;
-                background: black;
-            }
-
-            .active {
-                display: block;
-            }
-
-            .not-active {
-
-            }
-
-            .menu-screen {
-                text-align: center;
-                
-                padding-top: 200px;
-                height: 400px;
-            }
-
-            .button {
-                color: white;
-                font-family: spaceman;
-                font-size: 16pt;
-                display: block;
-                margin-top: 5px;
-                text-shadow: 0px 0px 5px red;
-                position: relative;
-                z-index: 1000;
-                padding: 3px 3px;
-            }
-
-            .title {
-                font-family: NiseJSRF, sans-serif;
-                font-size: 30pt;
-                color: white;
-                position: relative;
-                top: -80px;
-                z-index: 1000;
-            }
-
-            .button:hover  {
-                background: rgba(255, 0, 0, 0.6);
-            }
-
-            #background {
-                background: url('img/back.jpg');
-                height: 600px;
-                width: 800px;
-                /*overflow: visible;*/
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                z-index: 400;
-            }
-
-            #spaceNear, #spaceMiddle, #spaceFar {
-                height: 600px;
-                width: 800px;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                z-index: 500;
-            }
-
-            #spaceNear {
-                background: url('img/spaceNear.png');
-            }
-
-            #spaceFar {
-                background: url('img/spaceFar.png');
-            }
-
-            #spaceMiddle {
-                background: url('img/spaceMiddle.png');
-            }
-
-            #fps {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-
-            .configuration-screen {
-                padding: 30px 30px;
-                height: 540px;
-                width: 740px;
-            }
-
-            .ui-text-box {
-                font-family: spaceman;
-                font-size: 12pt;
-                text-shadow: 0px 0px 3px red;
-                padding: 10px 0px;
-                text-align: center;
-               
-                color: white;
-                margin-bottom: 30px;
-                background: rgb(100,100,100);
-                position: relative;
-            }
-
-            .ui-text-box-gradient {
-                background-image: linear-gradient(left , rgb(100,100,100) 0%, transparent 50%, rgb(100,100,100) 100%);
-                background-image: -o-linear-gradient(left , rgb(100,100,100) 0%, transparent 50%, rgb(100,100,100) 100%);
-                background-image: -moz-linear-gradient(left , rgb(100,100,100) 0%, transparent 20%, transparent 80%, rgb(100,100,100) 100%);
-                background-image: -webkit-linear-gradient(left , rgb(100,100,100) 0%, transparent 20%, transparent 80%, rgb(100,100,100) 100%);
-                background-image: -ms-linear-gradient(left , rgb(100,100,100) 0%, transparent 50%, rgb(100,100,100) 100%);
-
-                background-image: -webkit-gradient(
-                    linear,
-                    left top,
-                    right top,
-                    color-stop(0, rgb(100,100,100)),
-                    color-stop(0.3, transparent),
-                    color-stop(0.7, transparent),
-                    color-stop(1, rgb(100,100,100))
-                );
-
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0px;
-            }
-
-            .ui-window {
-                height: 400px;
-                width: 740px;
-                position: relative;
-            }
-
-            .ui-tabs {
-                height: 30px;
-                width: inherit;
-                position: absolute;
-                top: 0px;
-                left: 0px;
-            }
-
-            .ui-tab-content {
-                height: 370px;
-                width: inherit;
-                position: absolute;
-                top: 30px;
-                left: 0px;
-                background: rgb(100,100,100);
-                box-shadow: 0px 0px 3px black;
-                z-index: 850;
-                /*border: 1px solid white;*/
-            }
-
-            .ui-tab {
-                height: inherit;
-                display: inline-block;
-                position: relative;
-            }
-
-            .ui-tab-body {
-                height: inherit;
-                text-align: center;
-                float: left;
-                position: relative;
-                box-shadow: 0px 0px 5px black;
-                z-index: 600;
-                background: rgb(70,70,70);
-                /*border-top: 1px solid white;
-                border-left: 1px solid white;*/
-            }
-
-            .ui-tab-body span {
-                font-family: spaceman;
-                font-size: 12pt;
-                color: white;
-                text-shadow: 0px 0px 3px blue;
-                position: relative;
-                top: 5px;
-                padding-left: 10px;
-                padding-right: 5px;
-            }
-            .ui-tab-end {
-                width: 15px;
-                height: inherit;
-                overflow: hidden;
-                /*background: url("img/tab-end-inactive.png");*/
-                float: left;
-                position: relative;          
-            }
-
-            .next-tab {
-                margin-left: -12px;
-            }
-
-            .triangle {
-                height: 40px;
-                width: 20px;
-                -webkit-transform: rotate(-23deg);
-                -moz-transform: rotate(-23deg);
-                position: relative;
-                top: 1px;
-                left: -11px;
-                box-shadow: 0px 0px 5px black;
-                background: rgb(70,70,70);
-                z-index: 700;
-                /*border-right: 1px solid white;*/
-            }
-
-            .active-tab {
-                z-index: 900;
-            }
-
-            .active-background {
-                background: rgb(100,100,100);
-            }
-
-            .shadow-cover {
-                width: inherit;
-                height: 5px;
-                background: rgb(100,100,100);
-                position: absolute;
-                top: 30px;
-                z-index: 950;
-            }
-
-            .ui-button {
-                padding: 10px 10px;
-                background: rgb(100,100,100);
-                font-family: spaceman;
-                font-size: 12pt;
-                text-shadow: 0px 0px 3px red;
-                color: white;
-                text-align: center;
-                width: 100px;
-                float: left;
-                margin-top: 30px;
-                position: relative;
-                z-index: 1000;
-            }
-
-            .battle-button {
-                float: right;
-                background: rgb(180, 15, 15);
-                text-shadow: 0px 0px 3px black;
-            }
+           
         </style>
     </head>
     <body>
         <span id="fps"></span>
+        <div class="load-screen screen active">
+            <span class="load-progress">Loading data...
+            <div class="progress-bar"><div class="actual-progress"></div></div>
+            </span>
+        </div>
         <div class="menu-screen screen">
             <span class="title">star domination</span>
             <span class="button">new game</span>
