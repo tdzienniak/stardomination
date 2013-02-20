@@ -523,18 +523,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 7431,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "",
-			"file": "stardomination.sublime-project",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 7370,
 				"line_ending": "Windows"
 			}
 		},
@@ -604,14 +593,6 @@
 			}
 		},
 		{
-			"file": "/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 13149,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "js/module.js",
 			"settings":
 			{
@@ -658,14 +639,6 @@
 				"buffer_size": 804,
 				"line_ending": "Windows"
 			}
-		},
-		{
-			"file": "/I/Apache24/htdocs/jewel/full/scripts/game.js",
-			"settings":
-			{
-				"buffer_size": 2446,
-				"line_ending": "Unix"
-			}
 		}
 	],
 	"build_system": "",
@@ -704,14 +677,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/I/Apache24/htdocs/jewel/full/scripts/game.js",
+		"/I/Apache24/stardomination/stardomination.sublime-project",
 		"/I/Apache24/stardomination/js/alert.js",
 		"/I/Apache24/stardomination/js/main.js",
-		"/I/Apache24/htdocs/jewel/full/scripts/game.js",
 		"/I/Apache24/htdocs/jewel/full/scripts/screen.splash.js",
 		"/I/Apache24/htdocs/jewel/full/scripts/screen.game.js",
-		"/I/Apache24/stardomination/stardomination.sublime-project",
 		"/C/Apache24/conf/httpd.conf",
-		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/User/Plain text.sublime-settings",
 		"/C/Apache24/conf/extra/httpd-vhosts.conf",
 		"/I/Apache24/conf/extra/httpd-vhosts.conf",
@@ -831,7 +804,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -839,15 +812,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 7431,
+						"buffer_size": 7370,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2146,
-								2146
+								4617,
+								4617
 							]
 						],
 						"settings":
@@ -858,17 +831,45 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 513.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "stardomination.sublime-project",
+					"file": "css/style-common.css",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 5901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								341,
+								341
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "demo.html",
+					"settings":
+					{
+						"buffer_size": 8659,
 						"regions":
 						{
 						},
@@ -881,72 +882,18 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"is_xml": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "css/style-common.css",
-					"settings":
-					{
-						"buffer_size": 5901,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								643,
-								643
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 114.0,
+						"translation.y": 76.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "demo.html",
-					"settings":
-					{
-						"buffer_size": 8659,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2165,
-								2165
-							]
-						],
-						"settings":
-						{
-							"is_xml": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 684.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "js/menu-screen.js",
 					"settings":
 					{
@@ -975,7 +922,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "js/game-screen.js",
 					"settings":
 					{
@@ -1002,7 +949,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "js/configuration-screen.js",
 					"settings":
 					{
@@ -1029,7 +976,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "js/load-screen.js",
 					"settings":
 					{
@@ -1055,7 +1002,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "js/collisions.js",
 					"settings":
 					{
@@ -1082,7 +1029,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "js/ship.js",
 					"settings":
 					{
@@ -1093,8 +1040,8 @@
 						"selection":
 						[
 							[
-								3499,
-								3499
+								3796,
+								3796
 							]
 						],
 						"settings":
@@ -1111,35 +1058,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-					"settings":
-					{
-						"buffer_size": 13149,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1752,
-								1752
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 696.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
+					"buffer": 9,
 					"file": "js/module.js",
 					"settings":
 					{
@@ -1167,7 +1086,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 10,
 					"file": "js/edge.js",
 					"settings":
 					{
@@ -1195,7 +1114,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 11,
 					"file": "js/vector.js",
 					"settings":
 					{
@@ -1222,7 +1141,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 12,
 					"file": "js/ball.js",
 					"settings":
 					{
@@ -1250,7 +1169,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 13,
 					"file": "js/background.js",
 					"settings":
 					{
@@ -1278,7 +1197,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 14,
 					"file": "js/game.js",
 					"settings":
 					{
@@ -1291,34 +1210,6 @@
 							[
 								524,
 								524
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "/I/Apache24/htdocs/jewel/full/scripts/game.js",
-					"settings":
-					{
-						"buffer_size": 2446,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								382,
-								382
 							]
 						],
 						"settings":
