@@ -1,14 +1,17 @@
-﻿(function (window) {
-	function Edge (from, to, color) {
-		this.initialize(from, to, color);
-	}
+﻿//namespace
+this.sd = this.sd || {};
 
-    Edge.prototype = new createjs.Shape();
+(function () {
+	var Edge = function (from, to, color) {
+		this.initialize(from, to, color);
+	};
+
+    var p = Edge.prototype = new createjs.Shape();
 
     // constructor:
-    Edge.prototype.Shape_initialize = Edge.prototype.initialize;
+    p.Shape_initialize = p.initialize;
 
-    Edge.prototype.initialize = function (from, to, color) {
+    p.initialize = function (from, to, color) {
     	//original Shape's constructor
     	this.Shape_initialize();
 
@@ -19,8 +22,20 @@
     	this.toX = to[0];
     	this.toY = to[1];
 
-        this.normal = new Vector([this.toX - this.fromX, this.toY - this.fromY]).rotate(90).normalize();
+        this.normal = new sd.Vector([this.toX - this.fromX, this.toY - this.fromY]).rotate(90).normalize();
+    };
+
+    p.onCollision = function (object, params) {
+        var params = params || {};
+
+        if (object instanceof sd.Ball) {
+            object.onCollision(this, params);
+        } else if (object instanceof sd.Ship) {
+            object.onCollision(this, params);
+        } else {
+            return;
+        }
     }
 
-    window.Edge = Edge;
-})(window);
+    sd.Edge = Edge;
+})();
