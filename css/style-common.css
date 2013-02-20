@@ -10,12 +10,12 @@ canvas {
 
 @font-face {
     font-family: 'spaceman';
-    src: url('fonts/SPACEMAN.ttf') format('truetype');
+    src: url('fonts/SPACEMAN.TTF') format('truetype');
 }
 
 @font-face {
     font-family: 'NiseJSRF';
-    src: url('fonts/NiseJSRF.ttf') format('truetype');
+    src: url('fonts/NiseJSRF.TTF') format('truetype');
 }
 
 #fps {
