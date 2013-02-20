@@ -2,9 +2,9 @@
 this.sd = this.sd || {};
 
 (function () {
-	function Ship (x, y, radius, velocity, mass) {
-		this.initialize(x, y, radius, velocity, mass);
-	}
+    function Ship (x, y, radius, velocity, mass) {
+        this.initialize(x, y, radius, velocity, mass);
+    }
 
     var p = Ship.prototype = new createjs.Container();
 
@@ -12,13 +12,13 @@ this.sd = this.sd || {};
     p.Container_initialize = p.initialize;
 
     p.initialize = function (x, y, radius, velocity, mass) {
-    	//original Shape's constructor
-    	this.Container_initialize();
+        //original Shape's constructor
+        this.Container_initialize();
 
-    	this.x = x;//this.regX = x;
-    	this.y = y;//this.regY = y;
-    	this.radius = radius;
-    	this.mass = mass;
+        this.x = x;//this.regX = x;
+        this.y = y;//this.regY = y;
+        this.radius = radius;
+        this.mass = mass;
 
         //moduły
         this.front = new sd.Module(-20, 0, 20, "white", 1, "Dziób");
@@ -40,30 +40,30 @@ this.sd = this.sd || {};
         }, this);
 
         /*
-    	this.body = new createjs.Bitmap("img/ship.png");
-    	this.body.rotation = -90;
-    	this.body.x = -25;
-    	this.body.y = 35;
+        this.body = new createjs.Bitmap("img/ship.png");
+        this.body.rotation = -90;
+        this.body.x = -25;
+        this.body.y = 35;
 
-    	var g = new createjs.Graphics();
+        var g = new createjs.Graphics();
         g.beginLinearGradientStroke(["yellow", "rgba(50, 50, 50, 0)"], [0, 0.2], 0, 10, 100, 100).setStrokeStyle(10).moveTo(0, 0).lineTo(70, 0).endStroke();
 
         this.engine = new createjs.Shape(g);
         this.engine.visible = false;
 
-    	this.addChild(this.engine, this.body);
+        this.addChild(this.engine, this.body);
         */
-    	this.rotation = 0;
-    	this.targetAngle = 0;
-    	this.degPerSecond = 135;
+        this.rotation = 0;
+        this.targetAngle = 0;
+        this.degPerSecond = 135;
         this.acceleration = 6;
         this.maxVelocity = 150;
 
-    	if (velocity instanceof sd.Vector) {
-    		this.velocity = velocity;
-    	} else {
-    		this.velocity = new sd.Vector(velocity);	
-    	}
+        if (velocity instanceof sd.Vector) {
+            this.velocity = velocity;
+        } else {
+            this.velocity = new sd.Vector(velocity);    
+        }
     }
 
     p.move = function (delta, stage) {
@@ -77,8 +77,8 @@ this.sd = this.sd || {};
             module.prevX = modulePrev.x;
             module.prevY = modulePrev.y;
         }, this);
-    	this.x += delta / 1000 * this.velocity.x;
-    	this.y += delta / 1000 * this.velocity.y;
+        this.x += delta / 1000 * this.velocity.x;
+        this.y += delta / 1000 * this.velocity.y;
     };
 
     p.accelerate = function (angle) {
@@ -96,39 +96,39 @@ this.sd = this.sd || {};
     p.moveWithVector = function (vector) {
         this.prevX = this.x;
         this.prevY = this.y;
-    	this.x += vector.x;
-    	this.y += vector.y;
+        this.x += vector.x;
+        this.y += vector.y;
     };
 
     p.previousPosition = function () {
-    	return [this.prevX, this.prevY];
+        return [this.prevX, this.prevY];
     };
     
     p.updatePosition = function (position) {
-    	this.x = position[0];
-    	this.y = position[1];
+        this.x = position[0];
+        this.y = position[1];
     };
 
     p.tick = function (event) {
-    	//event.target.targetAngle = event.params[1];
+        //event.target.targetAngle = event.params[1];
         event.target.rotation = event.params[1];
         /*
-    	if (event.target.targetAngle < 180) {
-    		event.target.targetAngle
-    	}
-    	if (event.target.rotation > event.target.targetAngle) {
-    		event.target.rotation -= event.params[0] / 1000 * event.target.degPerSecond;
-    		if (event.target.rotation < event.target.targetAngle) {
-    		event.target.rotation = event.target.targetAngle;
-    		}
-    	} else if (event.target.rotation < event.target.targetAngle) {
-    		event.target.rotation += event.params[0] / 1000 * event.target.degPerSecond;
-    		if (event.target.rotation > event.target.targetAngle) {
-    		event.target.rotation = event.target.targetAngle;
-    		}
-    	} else {
-    		return;
-    	}*/
+        if (event.target.targetAngle < 180) {
+            event.target.targetAngle
+        }
+        if (event.target.rotation > event.target.targetAngle) {
+            event.target.rotation -= event.params[0] / 1000 * event.target.degPerSecond;
+            if (event.target.rotation < event.target.targetAngle) {
+            event.target.rotation = event.target.targetAngle;
+            }
+        } else if (event.target.rotation < event.target.targetAngle) {
+            event.target.rotation += event.params[0] / 1000 * event.target.degPerSecond;
+            if (event.target.rotation > event.target.targetAngle) {
+            event.target.rotation = event.target.targetAngle;
+            }
+        } else {
+            return;
+        }*/
     };
 
     p.onCollision = function (object, params) {

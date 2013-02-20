@@ -6,7 +6,7 @@ sd.screens["menu-screen"] = (function () {
 
 		//sd.Game.showScreen("menu-screen");
 
-		var menuBtns = document.getElementsByClassName('button'),
+		var menuBtns = zest(".button"),
 			newGameBtn = menuBtns[0],
 			optionsBtn = menuBtns[1],
 			aboutBtn = menuBtns[2];
