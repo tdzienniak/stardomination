@@ -10,12 +10,12 @@ canvas {
 
 @font-face {
     font-family: 'spaceman';
-    src: url('fonts/SPACEMAN.ttf') format('truetype');
+    src: url('../fonts/SPACEMAN.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'NiseJSRF';
-    src: url('fonts/NiseJSRF.ttf') format('truetype');
+    src: url('../fonts/NiseJSRF.ttf') format('truetype');
 }
 
 #fps {
@@ -67,7 +67,7 @@ canvas {
     box-shadow: 3px 3px 5px black;
     position: relative;
     display: none;
-    cursor: url('cursors/cursor.cur'), default;
+    cursor: url('../cursors/cursor.cur'), default;
     background: black;
 }
 
@@ -115,7 +115,7 @@ canvas {
 }
 
 #background {
-    background: url('img/back.jpg');
+    background: url('../img/back.jpg');
     height: 600px;
     width: 800px;
     /*overflow: visible;*/
@@ -135,15 +135,15 @@ canvas {
 }
 
 #spaceNear {
-    background: url('img/spaceNear.png');
+    background: url('../img/spaceNear.png');
 }
 
 #spaceFar {
-    background: url('img/spaceFar.png');
+    background: url('../img/spaceFar.png');
 }
 
 #spaceMiddle {
-    background: url('img/spaceMiddle.png');
+    background: url('../img/spaceMiddle.png');
 }
 
 #fps {
