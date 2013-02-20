@@ -6,24 +6,27 @@
  */
 
 (function () {
-	function Background (elementID, velocityScale) {
-		this.background = document.getElementById(elementID);
-		this.name = elementID;
-		this.velocityScale = velocityScale;
-		this.positionX = 0;
-		this.positionY = 0;
-	}
-
-	Background.prototype = {
-		move: function (velocity, delta) {
-			var velocity = velocity.scale(this.velocityScale, true); //prędkość po przeskalowaniu (wektor)
-				
-			this.positionX -= delta / 1000 * velocity.x;
-			this.positionY -= delta / 1000 * velocity.y;
-
-			this.background.style.backgroundPosition = this.positionX + "px " + this.positionY + "px";
-		}
+	Background = function (image, velocityScale, initX, initY) {
+		this.initialize(image, velocityScale, initX, initY);
 	};
+
+    var p = Background.prototype = new createjs.Bitmap();
+
+    // constructor:
+    p.Bitmap_initialize = p.initialize;
+
+    p.initialize = function (image, velocityScale, initX, initY) {
+    	this.Bitmap_initialize(image);
+        this.x = -initX;
+        this.y = -initY;
+    	this.velocityScale = velocityScale;
+    };
+
+    p.move = function (velocity, delta) {
+    	var velocity = velocity.scale(this.velocityScale, true); //prędkość po przeskalowaniu (wektor)
+    	this.x -= delta / 1000 * velocity.x;
+		this.y -= delta / 1000 * velocity.y;
+    };
 
 	sd.Background = Background;
 })();

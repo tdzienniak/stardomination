@@ -15,7 +15,6 @@ this.sd = this.sd || {};
 sd.Game = (function () {
 	var stage,
 		coll = sd.Collisions,
-        mouseStage,
         balls = [],
         edges = [],
         collisions = [],
@@ -23,19 +22,18 @@ sd.Game = (function () {
         mousePosition,
         overtime = 0,
         ship,
-        backgrounds,
+        backgrounds = [],
         maxFrameSkip = 5,
         skipedFrames = 0,
         shipDirection = new sd.Vector([0,0]),
         accelerate = false,
         accelerationAngle;
 
-    var init = function () {
+    function init () {
 
         stage = new createjs.Stage('mainCanvas');
 
-        mouseStage = new createjs.Stage('mouseTest');
-        mousePosition = document.getElementById('mousePosition');
+        //mousePosition = document.getElementById('mousePosition');
 
         ship = new sd.Ship(400, 300, 40, [40,30], 1);
         //mouseStage.addChild(ship);
@@ -44,12 +42,15 @@ sd.Game = (function () {
         bitmap.y -= 200;*/
 
         /* kontenery z tłem i cząsteczkami */
-        backgrounds = [
-            new sd.Background("background", 0.2),
-            new sd.Background("spaceNear", 0.8),
-            new sd.Background("spaceMiddle", 0.6),
-            new sd.Background("spaceFar", 0.4)
-        ];
+        var halfStageX = stage.canvas.width / 2,
+            halfStageY = stage.canvas.height / 2;
+
+        backgrounds.push(
+            //new sd.Background("img/back.jpg", -0.8, halfStageX, halfStageY),
+            new sd.Background("img/spaceNear1.png", -0.2, halfStageX, halfStageY),
+            new sd.Background("img/spaceMiddle1.png", -0.4, halfStageX, halfStageY),
+            new sd.Background("img/spaceFar1.png", -0.6, halfStageX, halfStageY)
+        );
         
         stage.addEventListener("stagemousemove", function (event) {
             var localCoords = stage.globalToLocal(event.stageX, event.stageY);
@@ -90,27 +91,32 @@ sd.Game = (function () {
             new sd.Edge([800, 0], [800, 600], "blue"),
             new sd.Edge([800, 600], [0, 600], "yellow"),
             new sd.Edge([0, 600], [0, 0], "pink"));
-
-        stage.addChild(/*bitmap,*/ ship);
+        
+        backgrounds.forEach(function (background, index, backgrounds) {
+            stage.addChild(background);
+        });
 
         balls.forEach(function (ball, index, balls) {
             stage.addChild(ball);
-            ball.cache(ball.x - ball.radius, ball.y - ball.radius, 2*ball.radius, 2*ball.radius);
+            //ball.cache(ball.x - ball.radius, ball.y - ball.radius, 2*ball.radius, 2*ball.radius);
         });
 
         edges.forEach(function (edge, index, edges) {
             stage.addChild(edge);
         });
 
+        stage.addChild(ship);
+        
         ship.addEventListener("tick", ship.tick);
         
-        createjs.Ticker.addEventListener('tick', loop);
+        createjs.Ticker.addEventListener('tick', sd.Game.loop);
         createjs.Ticker.setFPS('60');
+        //createjs.Ticker.useRAF = true;
 
         fpsCounter = document.getElementById('fps');
     }
 
-	var loop = function (event) {
+	function loop (event) {
         //console.log(event.delta);
         if (event.paused)
             return;
@@ -124,7 +130,7 @@ sd.Game = (function () {
             console.log('Po: ' + event.delta);
         }
 */
-        fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS());
+        fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
 
         balls.forEach(function (ballA, indexA, balls) {
             //jeśli obiekt nie znjduje się w polu widzenia to nie rysuje go
@@ -194,8 +200,10 @@ sd.Game = (function () {
         //console.log(ship);
         //mouseStage.update(event.delta, shipDirection.angle);
 
-        stage.x -= event.delta / 1000 * ship.velocity.x;
-        stage.y -= event.delta / 1000 * ship.velocity.y;
+        //stage.x -= event.delta / 1000 * ship.velocity.x;
+        //stage.y -= event.delta / 1000 * ship.velocity.y;
+        stage.x = -ship.x + stage.canvas.width / 2;
+        stage.y = -ship.y + stage.canvas.height / 2;;
 
         moveBackground(ship.velocity, event.delta);
 
@@ -208,8 +216,22 @@ sd.Game = (function () {
         });
     }
 
+    function showScreen(name, params) {
+        var allScreens = document.getElementsByClassName("screen"),
+            screenElement = document.getElementsByClassName(name);
+
+            for (var i = 0, len = allScreens.length; i < len; i += 1) {
+                allScreens[i].removeClass("active");
+            }
+
+        screenElement["0"].addClass("active");
+
+        sd.screens[name].init(params);
+    }
+
 	return {
 		init: init,
-		loop: loop
+		loop: loop,
+        showScreen: showScreen
 	};
 })();
