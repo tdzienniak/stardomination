@@ -7,6 +7,7 @@ sd.screens["game-screen"] = (function () {
         balls = [],
         edges = [],
         collisions = [],
+        bullets = [],
         fpsCounter,
         mousePosition,
         overtime = 0,
@@ -16,7 +17,9 @@ sd.screens["game-screen"] = (function () {
         skipedFrames = 0,
         shipDirection = new sd.Vector([0,0]),
         accelerate = false,
-        accelerationAngle;
+        accelerationAngle,
+        gameEvents = {},
+        inputFlags = {};
 
     function init () {
 
@@ -103,6 +106,21 @@ sd.screens["game-screen"] = (function () {
         //createjs.Ticker.useRAF = true;
 
         fpsCounter = document.getElementById('fps');
+
+        sd.Input.bind("w", [fireShipWeapon(ship, "front"), fireShipWeapon(ship, "rear")], false);
+        sd.Input.bind("p", [togglePause], true);
+
+        document.addEventListener("keydown", function (event) {
+            if (sd.Input.isImmediateEvent(event.keyCode)) {
+                sd.Input.trigger(event.keyCode, true, this);
+            } else {
+                sd.Input.setFlag(event.keyCode, true, this);
+            }
+        });
+
+        document.addEventListener("keyup", function (event) {
+            sd.Input.setFlag(event.keyCode, false);
+        });
     }
 
     function loop (event) {
@@ -112,13 +130,15 @@ sd.screens["game-screen"] = (function () {
 
         overtime = event.delta - 1000 / createjs.Ticker.getFPS();
         event.delta = 1000 / createjs.Ticker.getFPS();
-/*
+        
+        sd.Input.dispatchEvents();
+        /*      
         if (event.delta > 1000 / createjs.Ticker.getFPS() + 50) {
             console.log('Przed:' + event.delta);
             event.delta = 1000/createjs.Ticker.getFPS();
             console.log('Po: ' + event.delta);
         }
-*/
+        */
         fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
 
         balls.forEach(function (ballA, indexA, balls) {
@@ -205,22 +225,23 @@ sd.screens["game-screen"] = (function () {
         });
     }
 
-    function showScreen(name, params) {
-        var allScreens = document.getElementsByClassName("screen"),
-            screenElement = document.getElementsByClassName(name);
+    function fireShipWeapon(ship, weapon) {
+        //console.log("Strzał!");
+        /*
+        ship.fire(weapon);*/
+        var weapon = weapon,
+                ship = ship;
+        return function () {
+            console.log("Fire: " + weapon);
+        };
+    }
 
-            for (var i = 0, len = allScreens.length; i < len; i += 1) {
-                allScreens[i].removeClass("active");
-            }
-
-        screenElement["0"].addClass("active");
-
-        sd.screens[name].init(params);
+    function togglePause() {
+        var paused = createjs.Ticker.getPaused();
+        createjs.Ticker.setPaused( ! paused);
     }
 
     return {
-        init: init,
-        loop: loop,
-        showScreen: showScreen
+        init: init
     };
 })();

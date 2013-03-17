@@ -34,6 +34,10 @@ this.sd = this.sd || {};
             this.leftWing,
             this.hull
         ];
+        /*
+        this.weapons = {
+            front: new sd.Weapon()
+        };*/
 
         this.modules.forEach(function (module, index, array) {
             this.addChild(module);
@@ -130,7 +134,11 @@ this.sd = this.sd || {};
             return;
         }*/
     };
-
+/*
+    p.fire = function (weapon) {
+        return this.weapons[weapon].fire();
+    };
+*/
     p.onCollision = function (object, params) {
         var params = params || {};
         var collisions = [];
