@@ -15,10 +15,23 @@ this.sd = this.sd || {};
         //original Shape's constructor
         this.Container_initialize();
 
+        //właściwości związane z ruchem
         this.x = x;//this.regX = x;
         this.y = y;//this.regY = y;
         this.radius = radius;
         this.mass = mass;
+
+        this.rotation = 0;
+        this.targetAngle = 0;
+        this.degPerSecond = 135;
+        this.acceleration = 6;
+        this.maxVelocity = 150;
+
+        if (velocity instanceof sd.Vector) {
+            this.velocity = velocity;
+        } else {
+            this.velocity = new sd.Vector(velocity);    
+        }
 
         //moduły
         this.front = new sd.Module(-20, 0, 20, "white", 1, "Dziób");
@@ -34,40 +47,44 @@ this.sd = this.sd || {};
             this.leftWing,
             this.hull
         ];
-        /*
-        this.weapons = {
-            front: new sd.Weapon()
-        };*/
 
+
+
+        //dodawanie modułów do kontenera EaselJS
         this.modules.forEach(function (module, index, array) {
             this.addChild(module);
         }, this);
 
-        /*
-        this.body = new createjs.Bitmap("img/ship.png");
-        this.body.rotation = -90;
-        this.body.x = -25;
-        this.body.y = 35;
+        //console.log(this.front);
+        
+        this.weapons = {
+            front: new sd.Weapon({
+                reloadTime: 400,
+                energyConsumption: 20,
+                bulletQuantity: 1,
+                bulletProperties: {
+                    lifetime: 2000,
+                    bitmap: "none",
+                    radius: 2,
+                    velocity: 200
+                }
+            })/*,
+            rear: new sd.Weapon({
+                reloadTime: 500,
+                energyConsumption: 50,
+                bulletQuantity: 1,
+                bulletProperties: {
+                    bitmap: "none",
+                    radius: 2,
+                    velocity: 5
+                }
+            })*/
+        };
 
-        var g = new createjs.Graphics();
-        g.beginLinearGradientStroke(["yellow", "rgba(50, 50, 50, 0)"], [0, 0.2], 0, 10, 100, 100).setStrokeStyle(10).moveTo(0, 0).lineTo(70, 0).endStroke();
+        this.addEventListener("tick", this.weapons.front.tick);
 
-        this.engine = new createjs.Shape(g);
-        this.engine.visible = false;
-
-        this.addChild(this.engine, this.body);
-        */
-        this.rotation = 0;
-        this.targetAngle = 0;
-        this.degPerSecond = 135;
-        this.acceleration = 6;
-        this.maxVelocity = 150;
-
-        if (velocity instanceof sd.Vector) {
-            this.velocity = velocity;
-        } else {
-            this.velocity = new sd.Vector(velocity);    
-        }
+        this.maxEnergy = this.energy = 200;
+        this.energyRegPerSecond = 20;
     }
 
     p.move = function (delta, stage) {
@@ -75,6 +92,12 @@ this.sd = this.sd || {};
 
         this.prevX = this.x;
         this.prevY = this.y;
+
+        var shipGlobalCoords = this.localToLocal(0, 0, stage);
+        //console.log(shipGlobalCoords);
+
+        this.globalX = shipGlobalCoords.x;
+        this.globalY = shipGlobalCoords.y;
 
         this.modules.forEach(function (module, index, array) {
             var modulePrev = this.localToLocal(module.x, module.y, stage);
@@ -113,9 +136,43 @@ this.sd = this.sd || {};
         this.y = position[1];
     };
 
+    p.fire = function (weapon, event) {
+        //console.log(weapon);
+        var bullets;
+
+        if (this.energy > this.weapons[weapon].energyConsumption) {
+            bullets = this.weapons[weapon].fire(this.rotation, {x: this.globalX, y: this.globalY}, this.velocity, event.delta);
+        } else {
+            return false;
+        }
+
+        //console.log(typeof bullets)
+
+        if (bullets) {
+            this.energy -= this.weapons[weapon].energyConsumption;
+            console.log("Bum! " + weapon);
+            //console.log(bullets);
+            return bullets;
+        }
+    };
+
+    p.regenerateEnergy = function (delta) {
+        if (this.energy < this.maxEnergy) {
+            this.energy += delta / 1000 * this.energyRegPerSecond;
+            if (this.energy > this.maxEnergy) {
+                this.energy = this.maxEnergy;
+            }
+        }
+    };
+
     p.tick = function (event) {
+        //delta: event.params[0]
+        var _this = event.target;
+        
         //event.target.targetAngle = event.params[1];
-        event.target.rotation = event.params[1];
+        //console.log(event);
+        _this.rotation = event.params[1];
+        _this.regenerateEnergy(event.params[0]);
         /*
         if (event.target.targetAngle < 180) {
             event.target.targetAngle
@@ -134,11 +191,9 @@ this.sd = this.sd || {};
             return;
         }*/
     };
-/*
-    p.fire = function (weapon) {
-        return this.weapons[weapon].fire();
-    };
-*/
+
+    
+
     p.onCollision = function (object, params) {
         var params = params || {};
         var collisions = [];

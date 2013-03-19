@@ -1,7 +1,10 @@
 this.sd = this.sd || {};
 
 (function () {
-    function Weapon (properties);//(reloadTime, energyConsumption, bulletBitmap, bulletVelocity, bulletRadius, damagePerBullet) {
+    var cooldown = 0,
+        reloaded = true;
+
+    function Weapon (properties) {//(reloadTime, energyConsumption, bulletBitmap, bulletVelocity, bulletRadius, damagePerBullet) {
         this.initialize(properties);
     }
 
@@ -9,23 +12,48 @@ this.sd = this.sd || {};
 
     p.initialize = function (properties) {
         this.reloadTime = properties.reloadTime;
+        /*this.cooldown = 0;
+        this.reloaded = true;*/
         this.energyConsumption = properties.energyConsumption;
         this.bulletQuantity = properties.bulletQuantity;
-        this.bulletProperties = {
-            bitmap: properties.bulletBitmap,
-            radius: properties.bulletRadius,
-            velocity: properties.bulletVelocity
-        };
+        this.bulletProperties = properties.bulletProperties;
+        
     };
 
-    p.fire = function () {
+    p.fire = function (angle, coords, shipVelocity, delta) {
         var bullets = [];
 
-        for (var i = 0; i < this.bulletQuantity; i += 1) {
-            bullets.push(new sd.Bullet(this.bulletProperties));
+        if (reloaded) {
+            reloaded = false;
+            cooldown = this.reloadTime;
+
+            this.bulletProperties.angle = angle;
+            this.bulletProperties.x = coords.x;
+            this.bulletProperties.y = coords.y;
+            this.bulletProperties.shipVelocity = shipVelocity;
+
+            for (var i = 0; i < this.bulletQuantity; i += 1) {
+                bullets.push(new sd.Bullet(this.bulletProperties));
+            }
+            
+            return bullets;
         }
-        
-        return bullets;
+
+        return false;
+    };
+
+    p.tick = function (event) {
+        //console.log(event);
+        var delta = event.params[0];
+
+        if ( ! reloaded) {
+            cooldown -= delta;
+
+            if (cooldown <= 0) {
+                cooldown = 0;
+                reloaded = true;
+            }
+        }
     };
 
     sd.Weapon = Weapon;

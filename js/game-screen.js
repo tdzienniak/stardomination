@@ -9,6 +9,7 @@ sd.screens["game-screen"] = (function () {
         collisions = [],
         bullets = [],
         fpsCounter,
+        energyIndicator,
         mousePosition,
         overtime = 0,
         ship,
@@ -106,8 +107,9 @@ sd.screens["game-screen"] = (function () {
         //createjs.Ticker.useRAF = true;
 
         fpsCounter = document.getElementById('fps');
+        energyIndicator = document.getElementById('shipEnergy');
 
-        sd.Input.bind("w", [fireShipWeapon(ship, "front"), fireShipWeapon(ship, "rear")], false);
+        sd.Input.bind("w", [fireShipWeapon(ship, "front")], false);
         sd.Input.bind("p", [togglePause], true);
 
         document.addEventListener("keydown", function (event) {
@@ -131,7 +133,7 @@ sd.screens["game-screen"] = (function () {
         overtime = event.delta - 1000 / createjs.Ticker.getFPS();
         event.delta = 1000 / createjs.Ticker.getFPS();
         
-        sd.Input.dispatchEvents();
+        sd.Input.dispatchEvents({delta: event.delta});
         /*      
         if (event.delta > 1000 / createjs.Ticker.getFPS() + 50) {
             console.log('Przed:' + event.delta);
@@ -140,6 +142,7 @@ sd.screens["game-screen"] = (function () {
         }
         */
         fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+        energyIndicator.textContent = Math.round(ship.energy) + "/" + ship.maxEnergy;
 
         balls.forEach(function (ballA, indexA, balls) {
             //jeśli obiekt nie znjduje się w polu widzenia to nie rysuje go
@@ -149,6 +152,9 @@ sd.screens["game-screen"] = (function () {
             } else {
                 ballA.visible = true;
             }
+
+            //kolizja z pociskami
+            
 
             var shipDistance = coll.distanceBetweenPoints([ballA.x, ballA.y], [ship.x, ship.y]);
             if (shipDistance <= (ballA.radius + ship.radius)) {
@@ -163,6 +169,18 @@ sd.screens["game-screen"] = (function () {
                         collisions.push([ballA, ballB]);
                         //console.log('Jest kolizja!');
                     }
+                }
+            });
+
+            bullets.forEach(function (bullet, bulletIndex, bullets) {
+                var distance = coll.distanceBetweenPoints([ballA.x, ballA.y], [bullet.x, bullet.y]);
+                //console.log(bullet);
+                if (distance <= (ballA.radius + bullet.radius)) {
+                    //console.log("kolizja!");
+                    //createjs.Ticker.setPaused(true);
+                    stage.removeChild(ballA, bullet);
+                    delete bullets[bulletIndex];
+                    delete balls[indexA];
                 }
             });
         });
@@ -191,6 +209,17 @@ sd.screens["game-screen"] = (function () {
         balls.forEach(function (ball, index, balls) {
             ball.move(event.delta);
         });
+
+        bullets.forEach(function (bullet, bulletIndex, bullets) {
+            if ( ! bullet.canLive(event.delta)) {
+                stage.removeChild(bullet);
+                delete bullets[bulletIndex];
+
+                return;
+            }
+
+            bullet.move(event.delta);
+        })
 
         if (accelerate) {
             ship.accelerate(accelerationAngle);
@@ -226,13 +255,19 @@ sd.screens["game-screen"] = (function () {
     }
 
     function fireShipWeapon(ship, weapon) {
-        //console.log("Strzał!");
-        /*
-        ship.fire(weapon);*/
         var weapon = weapon,
-                ship = ship;
-        return function () {
-            console.log("Fire: " + weapon);
+            ship = ship;
+        return function (event) {
+            var _bullets;
+            _bullets = ship.fire(weapon, event);
+
+            if (_bullets) {
+                _bullets.forEach(function (bullet, index, array) {
+                    bullets.push(bullet);
+                    stage.addChild(bullet);
+                }, this)
+                //console.log(bullets);
+            }
         };
     }
 

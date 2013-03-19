@@ -3,7 +3,8 @@ this.sd = this.sd || {};
 sd.Input = (function () {
     var handlers = {},
         immediateHandlers = {},
-        actionFlags = {};
+        actionFlags = {},
+        pressedKeys = {};
 
     var keys = {
         "backspace": 8,
@@ -128,7 +129,7 @@ sd.Input = (function () {
         }
     }
 
-    function trigger (actionKey, immediately, _this) {
+    function trigger (actionKey, immediately, event) {
         //if immediately is set to true, handler will be executed at the moment of event happening
         //if not, handler will be executet during game loop
         var _this = _this || undefined,
@@ -137,7 +138,7 @@ sd.Input = (function () {
 
         if (actionHandlers.hasOwnProperty(actionKey)) {
             actionHandlers[actionKey].forEach(function (handler, actionKey, handlers) {
-                handler.apply(this);
+                handler.call(undefined, event);
             }, _this);
         } else {
             console.log("Such handler does not exist!");
@@ -150,19 +151,16 @@ sd.Input = (function () {
             return;
         }
         
-        if (typeof actionFlags[actionKey] !== "undefined") {
+        if (actionFlags.hasOwnProperty(actionKey)) {
             actionFlags[actionKey] = value;
         }
     }
 
-    function dispatchEvents (_this) {
+    function dispatchEvents (event) {
         var _this = _this || undefined;
         for (var actionKey in actionFlags) {
             if (actionFlags[actionKey]) {
-                trigger(actionKey, false, _this);
-                /*handlers[actionKey].forEach(function (handler, actionKey, handlers) {
-                    handler.apply(_this);
-                }, _this);*/
+                trigger(actionKey, false, event);
             }
         }
     }
