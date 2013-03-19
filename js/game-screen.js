@@ -7,7 +7,9 @@ sd.screens["game-screen"] = (function () {
         balls = [],
         edges = [],
         collisions = [],
+        bullets = [],
         fpsCounter,
+        energyIndicator,
         mousePosition,
         overtime = 0,
         ship,
@@ -16,7 +18,9 @@ sd.screens["game-screen"] = (function () {
         skipedFrames = 0,
         shipDirection = new sd.Vector([0,0]),
         accelerate = false,
-        accelerationAngle;
+        accelerationAngle,
+        gameEvents = {},
+        inputFlags = {};
 
     function init () {
 
@@ -103,6 +107,22 @@ sd.screens["game-screen"] = (function () {
         //createjs.Ticker.useRAF = true;
 
         fpsCounter = document.getElementById('fps');
+        energyIndicator = document.getElementById('shipEnergy');
+
+        sd.Input.bind("w", [fireShipWeapon(ship, "front")], false);
+        sd.Input.bind("p", [togglePause], true);
+
+        document.addEventListener("keydown", function (event) {
+            if (sd.Input.isImmediateEvent(event.keyCode)) {
+                sd.Input.trigger(event.keyCode, true, this);
+            } else {
+                sd.Input.setFlag(event.keyCode, true, this);
+            }
+        });
+
+        document.addEventListener("keyup", function (event) {
+            sd.Input.setFlag(event.keyCode, false);
+        });
     }
 
     function loop (event) {
@@ -112,14 +132,17 @@ sd.screens["game-screen"] = (function () {
 
         overtime = event.delta - 1000 / createjs.Ticker.getFPS();
         event.delta = 1000 / createjs.Ticker.getFPS();
-/*
+        
+        sd.Input.dispatchEvents({delta: event.delta});
+        /*      
         if (event.delta > 1000 / createjs.Ticker.getFPS() + 50) {
             console.log('Przed:' + event.delta);
             event.delta = 1000/createjs.Ticker.getFPS();
             console.log('Po: ' + event.delta);
         }
-*/
+        */
         fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
+        energyIndicator.textContent = Math.round(ship.energy) + "/" + ship.maxEnergy;
 
         balls.forEach(function (ballA, indexA, balls) {
             //jeśli obiekt nie znjduje się w polu widzenia to nie rysuje go
@@ -129,6 +152,9 @@ sd.screens["game-screen"] = (function () {
             } else {
                 ballA.visible = true;
             }
+
+            //kolizja z pociskami
+            
 
             var shipDistance = coll.distanceBetweenPoints([ballA.x, ballA.y], [ship.x, ship.y]);
             if (shipDistance <= (ballA.radius + ship.radius)) {
@@ -143,6 +169,18 @@ sd.screens["game-screen"] = (function () {
                         collisions.push([ballA, ballB]);
                         //console.log('Jest kolizja!');
                     }
+                }
+            });
+
+            bullets.forEach(function (bullet, bulletIndex, bullets) {
+                var distance = coll.distanceBetweenPoints([ballA.x, ballA.y], [bullet.x, bullet.y]);
+                //console.log(bullet);
+                if (distance <= (ballA.radius + bullet.radius)) {
+                    //console.log("kolizja!");
+                    //createjs.Ticker.setPaused(true);
+                    stage.removeChild(ballA, bullet);
+                    delete bullets[bulletIndex];
+                    delete balls[indexA];
                 }
             });
         });
@@ -171,6 +209,17 @@ sd.screens["game-screen"] = (function () {
         balls.forEach(function (ball, index, balls) {
             ball.move(event.delta);
         });
+
+        bullets.forEach(function (bullet, bulletIndex, bullets) {
+            if ( ! bullet.canLive(event.delta)) {
+                stage.removeChild(bullet);
+                delete bullets[bulletIndex];
+
+                return;
+            }
+
+            bullet.move(event.delta);
+        })
 
         if (accelerate) {
             ship.accelerate(accelerationAngle);
@@ -205,22 +254,29 @@ sd.screens["game-screen"] = (function () {
         });
     }
 
-    function showScreen(name, params) {
-        var allScreens = document.getElementsByClassName("screen"),
-            screenElement = document.getElementsByClassName(name);
+    function fireShipWeapon(ship, weapon) {
+        var weapon = weapon,
+            ship = ship;
+        return function (event) {
+            var _bullets;
+            _bullets = ship.fire(weapon, event);
 
-            for (var i = 0, len = allScreens.length; i < len; i += 1) {
-                allScreens[i].removeClass("active");
+            if (_bullets) {
+                _bullets.forEach(function (bullet, index, array) {
+                    bullets.push(bullet);
+                    stage.addChild(bullet);
+                }, this)
+                //console.log(bullets);
             }
+        };
+    }
 
-        screenElement["0"].addClass("active");
-
-        sd.screens[name].init(params);
+    function togglePause() {
+        var paused = createjs.Ticker.getPaused();
+        createjs.Ticker.setPaused( ! paused);
     }
 
     return {
-        init: init,
-        loop: loop,
-        showScreen: showScreen
+        init: init
     };
 })();

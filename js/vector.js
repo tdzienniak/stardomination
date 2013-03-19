@@ -170,6 +170,8 @@ this.sd = this.sd || {};
             this.y = -this.y;
             this.updatePolarCoords();
         }
+
+        return this;
     }
 
     v.angleBetween = function (vector) {

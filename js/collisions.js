@@ -1,4 +1,4 @@
-﻿//namespace
+//namespace
 this.sd = this.sd || {};
 
 /**

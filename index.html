@@ -37,14 +37,18 @@
                     'js/CSSClass.min.js',
                     'js/zest.js',
                     //[JavaScript] game files
+                    'js/game.js',
+                    'js/input.js',
                     'js/vector.js',
+                    'js/bullet.js',
+                    'js/weapon.js',
                     'js/ball.js',
                     'js/module.js',
                     'js/edge.js',
                     'js/ship.js',
                     'js/collisions.js',
                     'js/background.js',
-                    'js/game.js',
+                    
                     'js/menu-screen.js',
                     'js/configuration-screen.js',
                     'js/game-screen.js',
@@ -75,7 +79,6 @@
             function handleComplete (event) {
                 //var canvas = document.getElementById('mainCanvas');
                 var settings = {};
-                //sd.Game.init();
                 sd.Game.showScreen("menu-screen");
                 console.log('Załadowano wszystko!');
             }
@@ -95,7 +98,7 @@
             function handleLoadProgress (event) {
                 var progressBar = document.getElementsByClassName("progress-bar")["0"];
                 //console.log(event.loaded * 100);
-                progressBar.style.width = Math.round(event.loaded * 400) + "px";
+                progressBar.style.width = Math.round(event.loaded * 380) + "px";
             }
 
             function handleVisibilityChange () {
@@ -159,10 +162,8 @@
             </canvas>
         </div>
         <div class="info">
-            Move mouse to rotate the starship. Click to accelerate.<br /><br />
-            <span id="mousePosition"></span>
-            <button onclick="createjs.Ticker.setPaused(true)">Pause</button>
-            <button onclick="createjs.Ticker.setPaused(false)">Play</button>
+            Move mouse to rotate the starship. Click to accelerate. Press "P" to pause/resume game. Press "W" to fire.<br />
+            Energy: <span id="shipEnergy"></span>
         </div>
     </body>
 </html>

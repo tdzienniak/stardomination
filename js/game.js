@@ -7,11 +7,6 @@
 //namespace
 this.sd = this.sd || {};
 
-/**
- * Static Game module. Contains crucial functions:
- * init - initialize game
- * loop - game loop with all heavy logic and rendering
- */
 sd.Game = (function () {
 	function showScreen (screenName) {
         var activeScreen = zest('.active')[0],
