@@ -235,9 +235,8 @@ this.sd = this.sd || {};
 
                     this.velocity = newVelocities[0];
                     object[1].velocity = newVelocities[1];
-
-                    delete collisions[index];
             }, this);
+
         } else if (object instanceof sd.Edge) {
             var Ci = sd.Collisions.intersectEdgeObj(object, this);
 

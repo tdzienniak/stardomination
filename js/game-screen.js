@@ -20,7 +20,8 @@ sd.screens["game-screen"] = (function () {
         accelerate = false,
         accelerationAngle,
         gameEvents = {},
-        inputFlags = {};
+        inputFlags = {},
+        enemy;
 
     function init () {
 
@@ -101,6 +102,10 @@ sd.screens["game-screen"] = (function () {
         stage.addChild(ship);
         
         ship.addEventListener("tick", ship.tick);
+
+        enemy = new sd.Enemy(500, 300, 10, "white", [50, -80], 1);
+        stage.addChild(enemy);
+        enemy.addEventListener("tick", enemy.tick);
         
         createjs.Ticker.addEventListener('tick', loop);
         createjs.Ticker.setFPS('60');
@@ -144,67 +149,63 @@ sd.screens["game-screen"] = (function () {
         fpsCounter.textContent = Math.round(createjs.Ticker.getMeasuredFPS()) + " fps";
         energyIndicator.textContent = Math.round(ship.energy) + "/" + ship.maxEnergy;
 
-        balls.forEach(function (ballA, indexA, balls) {
-            //jeśli obiekt nie znjduje się w polu widzenia to nie rysuje go
-            if ((ballA.x + stage.x > stage.canvas.width + ballA.radius) ||
-                (ballA.y + stage.y > stage.canvas.height + ballA.radius)) {
-                ballA.visible = false;
+        for (var i = 0, len = balls.length; i < len; i += 1) {
+            if ((balls[i].x + stage.x > stage.canvas.width + balls[i].radius) ||
+                (balls[i].y + stage.y > stage.canvas.height + balls[i].radius)) {
+                balls[i].visible = false;
             } else {
-                ballA.visible = true;
+                balls[i].visible = true;
             }
-
-            //kolizja z pociskami
             
-
-            var shipDistance = coll.distanceBetweenPoints([ballA.x, ballA.y], [ship.x, ship.y]);
-            if (shipDistance <= (ballA.radius + ship.radius)) {
-                collisions.push([ballA, ship]);
+            var shipDistance = coll.distanceBetweenPoints([balls[i].x, balls[i].y], [ship.x, ship.y]);
+            if (shipDistance <= (balls[i].radius + ship.radius)) {
+                collisions.push([balls[i], ship]);
                 //console.log('Jest kolizja!');
             }
 
-            balls.forEach(function (ballB, indexB, array) {
-                if (indexB > indexA) {
-                    var distance = coll.distanceBetweenPoints([ballA.x, ballA.y], [ballB.x, ballB.y]);
-                    if (distance <= (ballA.radius + ballB.radius)) {
-                        collisions.push([ballA, ballB]);
-                        //console.log('Jest kolizja!');
-                    }
+            for (var j = i + 1; j < len; j += 1) {
+                var distance = coll.distanceBetweenPoints([balls[i].x, balls[i].y], [balls[j].x, balls[j].y]);
+                if (distance <= (balls[i].radius + balls[j].radius)) {
+                    collisions.push([balls[i], balls[j]]);
+                    //console.log('Jest kolizja!');
                 }
-            });
-
-            bullets.forEach(function (bullet, bulletIndex, bullets) {
-                var distance = coll.distanceBetweenPoints([ballA.x, ballA.y], [bullet.x, bullet.y]);
-                //console.log(bullet);
-                if (distance <= (ballA.radius + bullet.radius)) {
-                    //console.log("kolizja!");
-                    //createjs.Ticker.setPaused(true);
-                    stage.removeChild(ballA, bullet);
-                    delete bullets[bulletIndex];
-                    delete balls[indexA];
-                }
-            });
-        });
-
-        edges.forEach(function (edge, index1, edges) {
-            var shipDistance = coll.distanceToEdge([ship.x, ship.y], edge);
-
-            if (shipDistance < ship.radius) {
-                collisions.push([edge, ship]);
             }
 
-            balls.forEach(function (ball, index2, balls) {
-                var distance = coll.distanceToEdge([ball.x, ball.y], edge);
+            for (var j = 0, bulletsLen = bullets.length; j < bulletsLen; j += 1) {
+                var distance = coll.distanceBetweenPoints([balls[i].x, balls[i].y], [bullets[j].x, bullets[j].y]);
+                //console.log(bullets[j]);
+                if (distance <= (balls[i].radius + bullets[j].radius)) {
+                    //console.log("kolizja!");
+                    //createjs.Ticker.setPaused(true);
+                    stage.removeChild(balls[i], bullets[j]);
+                    bullets.splice(j, 1);
+                    balls.splice(i, 1);
+                }
+            }
 
-                if (distance < ball.radius) {
-                    collisions.push([edge, ball]);
-                }               
-            });
-        });
+            for (var j = 0, edgesLen = edges.length; j < edgesLen; j += 1) {
+                var distance = coll.distanceToEdge([balls[i].x, balls[i].y], edges[j]);
 
-        collisions.forEach(function (object, index, collisions) {
-            object[0].onCollision(object[1], {stage: stage});
-            delete collisions[index];
-        });
+                if (distance < balls[i].radius) {
+                    collisions.push([edges[j], balls[i]]);
+                }
+            }
+        }
+
+        for (var i = 0, len = edges.length; i < len; i += 1) {
+            var shipDistance = coll.distanceToEdge([ship.x, ship.y], edges[i]);
+
+            if (shipDistance < ship.radius) {
+                collisions.push([edges[i], ship]);
+            }
+        }
+
+        for (var i = 0, len = collisions.length; i < len; i += 1) {
+            collisions[i][0].onCollision(collisions[i][1], {stage: stage});
+            //collisions.splice(i, 1);
+        }
+
+        collisions = [];
 
         balls.forEach(function (ball, index, balls) {
             ball.move(event.delta);
@@ -213,7 +214,7 @@ sd.screens["game-screen"] = (function () {
         bullets.forEach(function (bullet, bulletIndex, bullets) {
             if ( ! bullet.canLive(event.delta)) {
                 stage.removeChild(bullet);
-                delete bullets[bulletIndex];
+                bullets.splice(bulletIndex, 1);
 
                 return;
             }

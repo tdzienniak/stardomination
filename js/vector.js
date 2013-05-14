@@ -89,20 +89,37 @@ this.sd = this.sd || {};
         return this;
     };
 
-    v.normalize = function (returnNew) {
+    v.setAngle = function (angle, returnNew) {
+        var returnNew = returnNew || false;
+
+        if (returnNew) {
+            return new Vector({length: this.length, angle: angle});
+        } else {
+            this.angle = angle;
+            this.updateCartCoords();
+
+            return this;
+        }
+    };
+
+    v.truncate = function (desiredLength, returnNew) {
         var returnNew = returnNew || false;
 
         if (returnNew) { //zwraca nowy wektor, nie modyfikuje obecnego
             return new Vector({
                 angle: this.angle,
-                length: 1
+                length: desiredLength
             });
         } else {
-            this.length = 1;
+            this.length = desiredLength;
             this.updateCartCoords();
         }
 
         return this;
+    };
+
+    v.normalize = function (returnNew) {
+        return this.truncate(1, returnNew);
     };
 
     v.substract = function (vector, returnNew) {
@@ -194,6 +211,10 @@ this.sd = this.sd || {};
     v.updateCartCoords = function () {
         this.x = Math.cos(this.angle * Math.PI / 180) * this.length;
         this.y = (this.angle === 180 || this.angle === -180) ? 0 : Math.sin(this.angle * Math.PI / 180) * this.length
+    };
+
+    v.debug = function () {
+        return "x: " + this.x + ", y: " + this.y + ", angle: " + this.angle + ", length: " + this.length;
     };
 
     sd.Vector = Vector;

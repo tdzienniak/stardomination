@@ -4,96 +4,72 @@
 		"selected_items":
 		[
 			[
-				"bull",
-				"bulletProperties"
-			],
-			[
 				"bu",
-				"bulletVelocity"
+				"bulletIndex"
 			],
 			[
-				"a",
-				"actionKey"
+				"len",
+				"length"
 			],
 			[
-				"ac",
-				"actionFlags"
+				"co",
+				"collisions"
 			],
 			[
-				"actio",
-				"actionKey"
+				"edg",
+				"edges"
 			],
 			[
-				"action",
-				"action"
+				"bulle",
+				"bullets"
 			],
 			[
-				"act",
-				"actionKey"
+				"ball",
+				"balls"
 			],
 			[
-				"k",
-				"keys"
+				"wa",
+				"wanderAngle"
 			],
 			[
-				"tr",
-				"trigger"
+				"en",
+				"enemy"
 			],
 			[
-				"w",
-				"weapon"
+				"wander",
+				"wanderForce"
 			],
 			[
-				"key",
-				"keyCode"
+				"An",
+				"ANGLE_CHANGE"
 			],
 			[
-				"event",
-				"event"
+				"angl",
+				"ANGLE_CHANGE"
 			],
 			[
-				"weap",
-				"weapon"
+				"up",
+				"updateCartCoords"
 			],
 			[
-				"pro",
-				"properties"
+				"Cir",
+				"CIRCLE_RADIUS"
 			],
 			[
-				"pr",
-				"properties"
+				"ret",
+				"return"
 			],
 			[
-				"border-co",
-				"border-color"
-			],
-			[
-				"bo",
-				"border"
-			],
-			[
-				"border-righ",
-				"border-right-color"
-			],
-			[
-				"bar",
-				"bar-progress"
-			],
-			[
-				"bordr",
-				"border-right"
-			],
-			[
-				"borde",
-				"border-bottom"
+				"return",
+				"returnNew"
 			],
 			[
 				"font",
 				"font-family"
 			],
 			[
-				"co",
-				"console"
+				"pro",
+				"progressText"
 			],
 			[
 				"get",
@@ -110,6 +86,14 @@
 			[
 				"ba",
 				"back-to-menu"
+			],
+			[
+				"ac",
+				"activeTab"
+			],
+			[
+				"a",
+				"active-tab"
 			],
 			[
 				"s",
@@ -178,6 +162,14 @@
 			[
 				"pa",
 				"padding"
+			],
+			[
+				"bo",
+				"border-left"
+			],
+			[
+				"borde",
+				"border-top"
 			],
 			[
 				"not",
@@ -284,10 +276,6 @@
 				"roots"
 			],
 			[
-				"ret",
-				"return	@return"
-			],
-			[
 				"re",
 				"return	@return"
 			],
@@ -384,10 +372,6 @@
 				"edge1"
 			],
 			[
-				"edg",
-				"edges"
-			],
-			[
 				"u",
 				"updatePolarCoords"
 			],
@@ -396,12 +380,12 @@
 				"reverseY"
 			],
 			[
-				"v",
-				"velocity"
+				"pr",
+				"prototype"
 			],
 			[
-				"up",
-				"updateCartCoords"
+				"v",
+				"velocity"
 			],
 			[
 				"fu",
@@ -514,6 +498,22 @@
 			[
 				"var",
 				"var_dump"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"fi",
+				"fields"
+			],
+			[
+				"regist",
+				"registerMethod"
+			],
+			[
+				"Fu",
+				"FunctionNotExistsException"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 7370,
+				"buffer_size": 7395,
 				"line_ending": "Windows"
 			}
 		},
@@ -532,14 +532,6 @@
 			"settings":
 			{
 				"buffer_size": 5901,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "demo.html",
-			"settings":
-			{
-				"buffer_size": 8659,
 				"line_ending": "Windows"
 			}
 		},
@@ -556,23 +548,22 @@
 			"file": "js/game-screen.js",
 			"settings":
 			{
-				"buffer_size": 8289,
+				"buffer_size": 9844,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/weapon.js",
 			"settings":
 			{
-				"buffer_size": 906,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "js/bullet.js",
+			"file": "js/input.js",
 			"settings":
 			{
-				"buffer_size": 201,
+				"buffer_size": 4476,
 				"line_ending": "Windows"
 			}
 		},
@@ -581,6 +572,14 @@
 			"settings":
 			{
 				"buffer_size": 1309,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "js/load-screen.js",
+			"settings":
+			{
+				"buffer_size": 155,
 				"line_ending": "Windows"
 			}
 		},
@@ -596,15 +595,7 @@
 			"file": "js/ship.js",
 			"settings":
 			{
-				"buffer_size": 7912,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "js/input.js",
-			"settings":
-			{
-				"buffer_size": 1366,
+				"buffer_size": 9419,
 				"line_ending": "Windows"
 			}
 		},
@@ -628,23 +619,26 @@
 			"file": "js/vector.js",
 			"settings":
 			{
-				"buffer_size": 5569,
+				"buffer_size": 6179,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "//namespace\nthis.sd = this.sd || {};\n\n(function () {\n	function Ball (x, y, radius, color, velocity, mass) {\n		this.initialize(x, y, radius, color, velocity, mass);\n	}\n\n    var p = Ball.prototype = new createjs.Shape();\n\n    // original Shape's constructor:\n    p.Shape_initialize = p.initialize;\n\n    p.initialize = function (x, y, radius, color, velocity, mass) {\n    	//original Shape's constructor\n    	this.Shape_initialize();\n\n    	this.graphics.beginFill(color).drawCircle(x, y, radius);\n\n    	this.regX = this.x = x;\n    	this.regY = this.y = y;\n    	this.radius = radius;\n    	this.mass = mass;\n\n    	if (velocity instanceof sd.Vector) {\n    		this.velocity = velocity;\n    	} else {\n    		this.velocity = new sd.Vector(velocity);	\n    	}\n    };\n\n    p.move = function (delta) {\n        this.prevX = this.x;\n        this.prevY = this.y;\n    	this.x += delta / 1000 * this.velocity.x;\n    	this.y += delta / 1000 * this.velocity.y;\n    };\n\n    p.moveWithVector = function (vector) {\n        this.prevX = this.x;\n        this.prevY = this.y;\n    	this.x += vector.x;\n    	this.y += vector.y;\n    };\n\n    p.previousPosition = function () {\n    	return [this.prevX, this.prevY];\n    };\n    \n    p.updatePosition = function (position) {\n    	this.x = position[0];\n    	this.y = position[1];\n    };\n\n    p.onCollision = function (object, params) {\n        var params = params || {};\n\n        if (object instanceof sd.Ball) {\n            var intersection = sd.Collisions.intersectObjObj(this, object);\n\n            this.updatePosition(this.previousPosition());\n            object.updatePosition(object.previousPosition());\n            this.moveWithVector(intersection[0]);\n            object.moveWithVector(intersection[1]);\n\n            var newVelocities = sd.Collisions.bounceObj(this, object);\n\n            \n            this.velocity = newVelocities[0];\n            object.velocity = newVelocities[1];\n        } else if (object instanceof sd.Edge) {\n            var Ci = sd.Collisions.intersectEdgeObj(object, this);\n\n            this.updatePosition([Ci.x, Ci.y]);\n\n            var newVelocity = sd.Collisions.bounceFromEdge(object, this);\n\n            this.velocity = newVelocity;\n        } else if (object instanceof sd.Ship) {\n            object.onCollision(this, params);\n        } else {\n            return;\n        }\n    };\n\n    sd.Ball = Ball;\n})();",
 			"file": "js/ball.js",
+			"file_size": 2435,
+			"file_write_time": 130052432537735006,
 			"settings":
 			{
-				"buffer_size": 2347,
+				"buffer_size": 2360,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "test.html",
+			"file": "js/enemy.js",
 			"settings":
 			{
-				"buffer_size": 2674,
+				"buffer_size": 3704,
 				"line_ending": "Windows"
 			}
 		},
@@ -660,32 +654,20 @@
 			"file": "js/game.js",
 			"settings":
 			{
-				"buffer_size": 804,
+				"buffer_size": 664,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/I/Apache24/htdocs/jewel/full/scripts/screen.game.js",
-			"settings":
-			{
-				"buffer_size": 9087,
-				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 335.0,
+		"height": 311.0,
 		"selected_items":
 		[
 			[
 				"Package Control: ",
-				"Package Control: Disable Package"
-			],
-			[
-				"te",
-				"TemplateNinja: New File"
+				"Package Control: Install Package"
 			],
 			[
 				"Package Control: t",
@@ -696,11 +678,14 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 522.0
+		"width": 400.0
 	},
 	"console":
 	{
-		"height": 146.0
+		"height": 146.0,
+		"history":
+		[
+		]
 	},
 	"distraction_free":
 	{
@@ -713,22 +698,29 @@
 	},
 	"file_history":
 	[
-		"/I/Apache24/htdocs/jewel/full/scripts/input.js",
-		"/I/Apache24/htdocs/jewel/full/scripts/game.js",
-		"/I/Apache24/htdocs/jewel/full/scripts/screen.game.js",
-		"/C/Users/Tymoteusz/Desktop/hosts",
-		"/I/Apache24/stardomination/js/load-screen.js",
-		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Tymoteusz/Downloads/jhm-src/README",
+		"/C/Windows/System32/Drivers/etc/hosts",
+		"/I/Apache24/stardomination/demo.html",
+		"/I/Apache24/local.dzienniak.art.pl/application/views/site/linki_view.php",
+		"/I/Apache24/local.dzienniak.art.pl/application/views/site/footer.php",
+		"/I/Apache24/local.dzienniak.art.pl/.htaccess",
+		"/C/node/game/public/index.html",
+		"/C/node/game/public/js/game.js",
+		"/C/node/game/game.js",
+		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/I/Apache24/stardomination/stardomination.sublime-project",
+		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Tymoteusz/Desktop/hosts",
+		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/I/Apache24/htdocs/jewel/full/scripts/game.js",
 		"/I/Apache24/stardomination/js/alert.js",
 		"/I/Apache24/stardomination/js/main.js",
 		"/I/Apache24/htdocs/jewel/full/scripts/screen.splash.js",
+		"/I/Apache24/htdocs/jewel/full/scripts/screen.game.js",
 		"/C/Apache24/conf/httpd.conf",
 		"/C/Users/Tymoteusz/AppData/Roaming/Sublime Text 2/Packages/User/Plain text.sublime-settings",
 		"/C/Apache24/conf/extra/httpd-vhosts.conf",
 		"/I/Apache24/conf/extra/httpd-vhosts.conf",
-		"/C/Windows/System32/Drivers/etc/hosts",
 		"/C/Apache24/stardomination/demo.html",
 		"/C/Apache24/htdocs/universe/universe.html",
 		"/C/Apache24/htdocs/hvs/hotvscold.sublime-project",
@@ -793,7 +785,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"black",
+			"ball",
+			"bullet",
+			"ballA",
+			"ballB",
+			"ballA",
+			"Ball",
 			"77",
 			"128",
 			"js",
@@ -844,23 +841,33 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
 					"file": "index.html",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7370,
+						"buffer_size": 7395,
 						"regions":
 						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+								],
+								"scope": "bookmarks"
+							}
 						},
 						"selection":
 						[
 							[
-								998,
-								998
+								1827,
+								1827
 							]
 						],
 						"settings":
@@ -871,7 +878,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 603.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -879,6 +886,7 @@
 				{
 					"buffer": 1,
 					"file": "css/style-common.css",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 5901,
@@ -899,42 +907,15 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 360.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "demo.html",
-					"settings":
-					{
-						"buffer_size": 8659,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"is_xml": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 76.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "js/menu-screen.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 447,
@@ -944,8 +925,8 @@
 						"selection":
 						[
 							[
-								0,
-								119
+								252,
+								252
 							]
 						],
 						"settings":
@@ -962,19 +943,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "js/game-screen.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8289,
+						"buffer_size": 9844,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7546,
-								7546
+								8782,
+								8879
 							]
 						],
 						"settings":
@@ -984,66 +966,70 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3920.0,
+						"translation.y": 4487.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "js/weapon.js",
+					"file": "js/input.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 906,
+						"buffer_size": 4476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								777,
-								777
+								299,
+								299
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2546.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "js/bullet.js",
-					"settings":
-					{
-						"buffer_size": 201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								201,
-								201
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
 					"file": "js/configuration-screen.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1309,
@@ -1053,8 +1039,8 @@
 						"selection":
 						[
 							[
-								378,
-								378
+								1309,
+								169
 							]
 						],
 						"settings":
@@ -1062,6 +1048,33 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js/load-screen.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1072,6 +1085,7 @@
 				{
 					"buffer": 8,
 					"file": "js/collisions.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 5939,
@@ -1081,8 +1095,8 @@
 						"selection":
 						[
 							[
-								547,
-								547
+								0,
+								5939
 							]
 						],
 						"settings":
@@ -1100,17 +1114,18 @@
 				{
 					"buffer": 9,
 					"file": "js/ship.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7912,
+						"buffer_size": 9419,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4313,
-								4313
+								2787,
+								2787
 							]
 						],
 						"settings":
@@ -1121,40 +1136,15 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2300.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 10,
-					"file": "js/input.js",
-					"settings":
-					{
-						"buffer_size": 1366,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1353,
-								1353
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
 					"file": "js/module.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1016,
@@ -1181,8 +1171,9 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 11,
 					"file": "js/edge.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1021,
@@ -1192,8 +1183,8 @@
 						"selection":
 						[
 							[
-								353,
-								353
+								760,
+								760
 							]
 						],
 						"settings":
@@ -1203,25 +1194,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "js/vector.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6179,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3101,
+								3101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1596.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 13,
-					"file": "js/vector.js",
+					"file": "js/ball.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5569,
+						"buffer_size": 2360,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								256,
-								256
+								1615,
+								1615
 							]
 						],
 						"settings":
@@ -1231,25 +1252,26 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 733.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 14,
-					"file": "js/ball.js",
+					"file": "js/enemy.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2347,
+						"buffer_size": 3704,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								220,
-								257
+								2654,
+								2654
 							]
 						],
 						"settings":
@@ -1259,41 +1281,15 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1539.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 15,
-					"file": "test.html",
-					"settings":
-					{
-						"buffer_size": 2674,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1211,
-								1211
-							]
-						],
-						"settings":
-						{
-							"is_xml": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 660.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
 					"file": "js/background.js",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 933,
@@ -1320,19 +1316,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 16,
 					"file": "js/game.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 804,
+						"buffer_size": 664,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								524,
-								524
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1343,32 +1340,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "/I/Apache24/htdocs/jewel/full/scripts/screen.game.js",
-					"settings":
-					{
-						"buffer_size": 9087,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								686,
-								686
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1407,10 +1378,7 @@
 		]
 	},
 	"menu_visible": true,
-	"output.jslint_result_view":
-	{
-		"height": 132.0
-	},
+	"project": "stardomination.sublime-project",
 	"replace":
 	{
 		"height": 0.0
@@ -1426,16 +1394,34 @@
 	},
 	"select_project":
 	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"I:\\Apache24\\htdocs\\blue.js\\blue.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
 		"height": 0.0,
 		"selected_items":
 		[
 		],
 		"width": 0.0
 	},
+	"settings":
+	{
+	},
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 200.0,
-	"status_bar_visible": true
+	"side_bar_width": 164.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }
